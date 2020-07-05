@@ -1,0 +1,97 @@
+.whoopsWrapper, .whoopsWrapper .link:hover, .whoopsWrapper .link:focus, .whoopsWrapper .link:active {
+  -webkit-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+}
+
+.whoopsWrapper .link {
+  padding: 5px 15px;
+  background: #33717f;
+  color: #fff;
+  border: 1px solid #33717f;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.whoopsWrapper .link:hover, .whoopsWrapper .link:focus, .whoopsWrapper .link:active {
+  border-color: #dcdbe1;
+  background: #fff;
+  color: #111;
+}
+
+::-webkit-scrollbar-button {
+  background-repeat: no-repeat;
+  width: 5px;
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #d8d3d0;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color: #33717f;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #2a5d68;
+}
+
+::-webkit-resizer {
+  background-repeat: no-repeat;
+  width: 4px;
+  height: 0;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+.whoopsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  background-color: #fff;
+  border-radius: 3px;
+}
+.whoopsWrapper .title {
+  margin-bottom: 50px;
+}
+.whoopsWrapper svg {
+  color: #33717f;
+  margin-bottom: 50px;
+  font-size: 200px;
+  box-shadow: 0 0 0 rgba(107, 116, 120, 0.6);
+  animation: pulse 3s infinite;
+  border-radius: 50%;
+}
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(107, 116, 120, 0.6);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 20px rgba(107, 116, 120, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(107, 116, 120, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(107, 116, 120, 0.6);
+    box-shadow: 0 0 0 0 rgba(107, 116, 120, 0.6);
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 20px rgba(107, 116, 120, 0);
+    box-shadow: 0 0 0 20px rgba(107, 116, 120, 0);
+  }
+  100% {
+    -moz-box-shadow: 0 0 0 0 rgba(107, 116, 120, 0);
+    box-shadow: 0 0 0 0 rgba(107, 116, 120, 0);
+  }
+}
+
+/*# sourceMappingURL=NotFound.module.css.map */

@@ -1,0 +1,9 @@
+@import "../../style/style";
+
+.footer {
+    @extend %box-shadow;
+    grid-area: footer;
+    background: $color-greenish-blue;
+    border-radius: 3px 3px 0 0;
+    padding: 10px;
+}

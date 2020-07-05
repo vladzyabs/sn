@@ -1,0 +1,8 @@
+@import "../../style/style";
+
+.header {
+    @extend %box-shadow;
+    background: $color-greenish-blue;
+    grid-area: header;
+    border-radius: 0 0 3px 3px;
+}

@@ -1,15 +1,54 @@
-import React from "react";
-import {NavLink} from "react-router-dom"
-import {paths} from "../../layout/paths";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {frownIconDefinition} from "../../layout/icons";
+@import "../../style/style";
 
-export function NotFound({location}: any) {
-    return (
-        <div>
-            <h1>404 page '{location.pathname}' not found</h1>
-            <FontAwesomeIcon icon={frownIconDefinition} size={'sm'}/>
-            <NavLink to={paths.profile}>Home</NavLink>
-        </div>
-    )
+.whoopsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  @extend %box-shadow;
+  background-color: $color-white;
+  border-radius: $borderRadius;
+  .title {
+    margin-bottom: 50px;
+  }
+
+  svg {
+    color: $color-greenish-blue;
+    margin-bottom: 50px;
+
+    font-size: 200px;
+    box-shadow: 0 0 0 rgba(107, 116, 120,0.6);
+    animation: pulse 3s infinite;
+    border-radius: 50%;
+  }
+
+  .link {
+    @extend %button;
+  }
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    -webkit-box-shadow: 0 0 0 0 rgba(107, 116, 120,0.6);
+  }
+  70% {
+    -webkit-box-shadow: 0 0 0 20px rgba(107, 116, 120, 0);
+  }
+  100% {
+    -webkit-box-shadow: 0 0 0 0 rgba(107, 116, 120, 0);
+  }
+}
+@keyframes pulse {
+  0% {
+    -moz-box-shadow: 0 0 0 0 rgba(107, 116, 120, 0.6);
+    box-shadow: 0 0 0 0 rgba(107, 116, 120, 0.6);
+  }
+  70% {
+    -moz-box-shadow: 0 0 0 20px rgba(107, 116, 120, 0);
+    box-shadow: 0 0 0 20px rgba(107, 116, 120, 0);
+  }
+  100% {
+    -moz-box-shadow: 0 0 0 0 rgba(107, 116, 120, 0);
+    box-shadow: 0 0 0 0 rgba(107, 116, 120, 0);
+  }
 }

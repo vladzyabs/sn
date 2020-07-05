@@ -1,0 +1,144 @@
+.messages .addMessage, .messages .message, .messages .myMessage, .chats, .messages .button:hover, .messages .button:focus, .messages .button:active {
+  -webkit-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+}
+
+.messages .button {
+  padding: 5px 15px;
+  background: #33717f;
+  color: #fff;
+  border: 1px solid #33717f;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.messages .button:hover, .messages .button:focus, .messages .button:active {
+  border-color: #dcdbe1;
+  background: #fff;
+  color: #111;
+}
+
+.messages .textarea {
+  outline: none;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid #dadada;
+  transition: 0.3s;
+  margin-bottom: 10px;
+}
+.messages .textarea:hover, .messages .textarea:focus, .messages .textarea:active {
+  border: 1px solid #33717f;
+}
+
+::-webkit-scrollbar-button {
+  background-repeat: no-repeat;
+  width: 5px;
+  height: 0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #d8d3d0;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color: #33717f;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #2a5d68;
+}
+
+::-webkit-resizer {
+  background-repeat: no-repeat;
+  width: 4px;
+  height: 0;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.chats {
+  min-width: 250px;
+  margin-right: 10px;
+  background: #fff;
+  border-radius: 3px;
+}
+.chats .chat:last-child .chatLink {
+  margin-bottom: 0;
+  border: none;
+}
+.chats .chat:first-child .activeChatLink {
+  border-radius: 3px 3px 0 0;
+}
+.chats .chat:last-child .activeChatLink {
+  border-radius: 0 0 3px 3px;
+}
+.chats .chatLink {
+  display: block;
+  padding: 5px 10px;
+  border-bottom: 1px solid #dadada;
+  color: #111;
+  transition: 0.3s;
+}
+.chats .chatLink:hover {
+  color: #33717f;
+}
+.chats .activeChatLink {
+  color: #fff;
+  background: #33717f;
+  border-color: #33717f;
+  cursor: auto;
+}
+.chats .activeChatLink:hover {
+  color: #fff;
+}
+
+.messages {
+  width: 100%;
+}
+.messages .messageWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-height: 70vh;
+  overflow-y: overlay;
+}
+.messages .message, .messages .myMessage {
+  background: #fff;
+  margin-bottom: 10px;
+  padding: 5px 20px;
+  border-radius: 3px;
+}
+.messages .myMessage {
+  text-align: right;
+  margin: 0 10px 10px auto;
+}
+.messages .message {
+  margin-left: 10px;
+}
+.messages .addMessage {
+  background: #fff;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px;
+}
+.messages .addMessage span {
+  margin-bottom: 5px;
+}
+.messages .button svg {
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=Dialogs.module.css.map */

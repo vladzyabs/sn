@@ -1,0 +1,109 @@
+@import "../../style/style";
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.chats {
+  min-width: 250px;
+  margin-right: 10px;
+  background: $color-white;
+  border-radius: 3px;
+  @extend %box-shadow;
+
+  .chat {
+    &:last-child .chatLink {
+      margin-bottom: 0;
+      border: none;
+    }
+
+    &:first-child .activeChatLink {
+      border-radius: 3px 3px 0 0;
+    }
+
+    &:last-child .activeChatLink {
+      border-radius: 0 0 3px 3px;
+    }
+  }
+
+  .chatLink {
+    display: block;
+    padding: 5px 10px;
+    border-bottom: 1px solid $color-gray;
+    color: $color-black;
+    transition: 0.3s;
+
+    &:hover {
+      color: $color-greenish-blue;
+    }
+  }
+
+  .activeChatLink {
+    color: $color-white;
+    background: $color-greenish-blue;
+    border-color: $color-greenish-blue;
+    cursor: auto;
+
+    &:hover {
+      color: $color-white
+    }
+  }
+}
+
+.messages {
+  width: 100%;
+
+  .messageWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 70vh;
+    overflow-y: overlay;
+  }
+
+  %commonMessage {
+    background: $color-white;
+    @extend %box-shadow;
+    margin-bottom: 10px;
+    padding: 5px 20px;
+    border-radius: 3px;
+  }
+
+  .myMessage {
+    @extend %commonMessage;
+    text-align: right;
+    margin: 0 10px 10px auto;
+  }
+
+  .message {
+    @extend %commonMessage;
+    margin-left: 10px;
+  }
+
+  .addMessage {
+    @extend %box-shadow;
+    background: $color-white;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+
+    span {
+      margin-bottom: 5px;
+    }
+  }
+
+  .textarea {
+    @extend %textarea;
+  }
+
+  .button {
+    @extend %button;
+    svg {
+      margin-left: 10px;
+    }
+  }
+}

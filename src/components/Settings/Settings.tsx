@@ -4,7 +4,7 @@ import React from "react";
 function Settings(props: any) {
     return (
         <div>
-            Dialogs
+            Settings
         </div>
     )
 }

@@ -1,12 +1,12 @@
 import React from "react";
 // import style from "./Dialogs.module.scss";
 
-function Users(props: any) {
+function Login(props: any) {
     return (
         <div>
-            Users
+            Login
         </div>
     )
 }
 
-export default Users
+export default Login

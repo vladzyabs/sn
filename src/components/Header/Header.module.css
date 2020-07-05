@@ -1,3 +1,9 @@
+.header {
+  -webkit-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+}
+
 ::-webkit-scrollbar-button {
   background-repeat: no-repeat;
   width: 5px;
@@ -28,24 +34,10 @@
   width: 4px;
 }
 
-.App {
-  background-color: #f5f5f5;
-  color: #111;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-areas: "header header" "navbar main" "footer footer";
-  grid-template-rows: 60px 1fr 60px;
-  grid-template-columns: 220px 10fr;
-  grid-gap: 10px;
-  position: relative;
-  height: 100vh;
+.header {
+  background: #33717f;
+  grid-area: header;
+  border-radius: 0 0 3px 3px;
 }
 
-@media (max-width: 1200px) {
-  .App {
-    margin: 0 15px;
-  }
-}
-
-/*# sourceMappingURL=App.css.map */
+/*# sourceMappingURL=Header.module.css.map */

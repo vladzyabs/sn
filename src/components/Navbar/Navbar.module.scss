@@ -1,0 +1,41 @@
+@import "../../style/style";
+
+.navbarWrapper {
+    grid-area: navbar;
+}
+
+.navbar {
+
+}
+
+.navbar > ul {
+    margin: 0;
+    padding: 0;
+}
+
+.navbarLink {
+    display: block;
+    padding: 3px 10px;
+    transition: $transition-l;
+    color: $color-black;
+    border-radius: 3px;
+    margin-bottom: 5px;
+    svg {
+        margin-right: 10px;
+    }
+}
+.activeNavbarLink {
+    @extend %box-shadow;
+    background: $color-greenish-blue;
+    color: $color-white;
+}
+.navbar > ul li {
+    &:last-child .navbarLink {
+        margin-bottom: 0;
+    }
+}
+.navbarLink:hover {
+    @extend %box-shadow;
+    background: $color-greenish-blue;
+    color: $color-white;
+}
