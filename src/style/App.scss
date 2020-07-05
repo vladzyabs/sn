@@ -1,0 +1,20 @@
+@import "style";
+
+.App {
+  background-color: #f5f5f5;
+  color: $color-black;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-areas: "header header" "navbar main" "footer footer";
+  grid-template-rows: 60px 1fr 60px;
+  grid-template-columns: 220px 10fr;
+  grid-gap: 10px;
+  position: relative;
+  height: 100vh;
+}
+@media (max-width: 1200px) {
+  .App {
+    margin: 0 15px
+  }
+}

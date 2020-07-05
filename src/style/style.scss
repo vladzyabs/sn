@@ -1,0 +1,92 @@
+// color site
+$color-white: #fff;
+$color-black: #111;
+$color-gray: #dadada;
+$color-greenish-blue-dark: #2a5d68;
+$color-greenish-blue: #33717f;
+$color-pastel-turquoise: #7dbbb9;
+$color-pale-blue: #c5d7d9;
+$color-forest-wolf: #d8d3d0;
+$color-light-blue: #dcdbe1;
+
+// const
+$transition-f: .1s;
+$transition-m: .2s;
+$transition-l: .3s;
+
+$borderRadius: 3px;
+
+// fonts
+
+// items
+
+%box-shadow {
+  -webkit-box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+  -moz-box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+  box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);
+}
+
+%button {
+  padding: 5px 15px;
+  background: $color-greenish-blue;
+  color: $color-white;
+  border: 1px solid $color-greenish-blue;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: $transition-m;
+
+  &:hover,
+  &:focus,
+  &:active {
+    border-color: $color-light-blue;
+    background: $color-white;
+    color: $color-black;
+    @extend %box-shadow;
+  }
+}
+
+%textarea {
+  outline: none;
+  width: 100%;
+  border-radius: 3px;
+  border: 1px solid $color-gray;
+  transition: $transition-l;
+  margin-bottom: 10px;
+  &:hover,
+  &:focus,
+  &:active {
+    border: 1px solid $color-greenish-blue;
+  }
+}
+
+::-webkit-scrollbar-button {
+  background-repeat:no-repeat;
+  width:5px;
+  height:0;
+}
+
+::-webkit-scrollbar-track {
+  background-color:$color-forest-wolf
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color:$color-greenish-blue;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background-color:$color-greenish-blue-dark;
+}
+
+::-webkit-resizer{
+  background-repeat:no-repeat;
+  width:4px;
+  height:0;
+}
+
+::-webkit-scrollbar{
+  width: 4px;
+}
+
+

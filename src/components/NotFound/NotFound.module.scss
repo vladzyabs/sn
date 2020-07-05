@@ -1,0 +1,15 @@
+import React from "react";
+import {NavLink} from "react-router-dom"
+import {paths} from "../../layout/paths";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {frownIconDefinition} from "../../layout/icons";
+
+export function NotFound({location}: any) {
+    return (
+        <div>
+            <h1>404 page '{location.pathname}' not found</h1>
+            <FontAwesomeIcon icon={frownIconDefinition} size={'sm'}/>
+            <NavLink to={paths.profile}>Home</NavLink>
+        </div>
+    )
+}
