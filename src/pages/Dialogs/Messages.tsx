@@ -2,7 +2,7 @@ import React, {ChangeEvent} from "react";
 import style from "./Dialogs.module.scss";
 import Message from "./Message";
 import {actionAddMessage, actionInputNewMessage} from "../../redux/reducers/dialogsReduser";
-import Icon, {iconsName, iconsPrefix} from "../Icon/Icon";
+import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
 import {MessagesType} from "../../redux/StoreTypes";
 
 type PropsMessagesType = {

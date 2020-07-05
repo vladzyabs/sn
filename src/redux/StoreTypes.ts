@@ -28,6 +28,7 @@ export type DialogsType = {
 }
 
 // root
+export type DispatchType = (action: ActionType) => void
 export type RootStateType = {
     profileData: ProfileType
     dialogsData: DialogsType
@@ -35,7 +36,7 @@ export type RootStateType = {
 export type RootStoreType = {
     _state: RootStateType
     getState: () => RootStateType
-    dispatch: (action: ActionType) => void,
+    dispatch: DispatchType
     _callSubscriber: (state: RootStateType) => void
     subscribe: (observer: (state: RootStateType) => void) => void
 }

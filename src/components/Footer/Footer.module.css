@@ -1,44 +1,17 @@
-.footer {
-  -webkit-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import "src/style/style.scss", "src/style/variables";
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   footer.module.scss 1:9  root stylesheet */
 
-::-webkit-scrollbar-button {
-  background-repeat: no-repeat;
-  width: 5px;
-  height: 0;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"src/style/style.scss\", \"src/style/variables\";\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   footer.module.scss 1:9  root stylesheet";
 }
-
-::-webkit-scrollbar-track {
-  background-color: #d8d3d0;
-}
-
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  background-color: #33717f;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #2a5d68;
-}
-
-::-webkit-resizer {
-  background-repeat: no-repeat;
-  width: 4px;
-  height: 0;
-}
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-.footer {
-  grid-area: footer;
-  background: #33717f;
-  border-radius: 3px 3px 0 0;
-  padding: 10px;
-}
-
-/*# sourceMappingURL=Footer.module.css.map */

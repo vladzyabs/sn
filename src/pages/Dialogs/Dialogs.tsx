@@ -2,11 +2,11 @@ import React from "react";
 import style from "./Dialogs.module.scss";
 import Messages from "./Messages";
 import Chats from "./Chats";
-import {DialogsType} from "../../redux/StoreTypes";
+import {DialogsType, DispatchType} from "../../redux/StoreTypes";
 
 type PropsDialogsType = {
     dialogsData: DialogsType,
-    dispatch: any
+    dispatch: DispatchType
 }
 
 function Dialogs(props: PropsDialogsType) {

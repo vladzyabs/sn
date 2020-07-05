@@ -2,20 +2,20 @@ import React from "react";
 import {Switch, Route} from "react-router-dom";
 import {paths} from "../../layout/paths";
 import style from "./Main.module.scss";
-import Profile from "../Profile/Profile";
-import Dialogs from "../Dialogs/Dialogs";
-import Settings from "../Settings/Settings";
-import Users from "../Users/Users";
-import News from "../News/News";
-import Music from "../Music/Music";
-import {NotFound} from "../NotFound/NotFound";
-import Login from "../Login/Login";
-import {DialogsType, ProfileType} from "../../redux/StoreTypes";
+import Profile from "../../pages/Profile/Profile";
+import Dialogs from "../../pages/Dialogs/Dialogs";
+import Settings from "../../pages/Settings/Settings";
+import Users from "../../pages/Users/Users";
+import News from "../../pages/News/News";
+import Music from "../../pages/Music/Music";
+import {NotFound} from "../../pages/NotFound/NotFound";
+import Login from "../../pages/Login/Login";
+import {DialogsType, DispatchType, ProfileType} from "../../redux/StoreTypes";
 
 type PropsMainType = {
     profileData: ProfileType
     dialogsData: DialogsType
-    dispatch: any
+    dispatch: DispatchType
 }
 
 function Main(props: PropsMainType) {

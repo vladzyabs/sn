@@ -1,24 +1,4 @@
-// color site
-$color-white: #fff;
-$color-black: #111;
-$color-gray: #dadada;
-$color-greenish-blue-dark: #2a5d68;
-$color-greenish-blue: #33717f;
-$color-pastel-turquoise: #7dbbb9;
-$color-pale-blue: #c5d7d9;
-$color-forest-wolf: #d8d3d0;
-$color-light-blue: #dcdbe1;
-
-// const
-$transition-f: .1s;
-$transition-m: .2s;
-$transition-l: .3s;
-
-$borderRadius: 3px;
-
-// fonts
-
-// items
+@import "variables";
 
 %box-shadow {
   -webkit-box-shadow: 0 1px 6px 0 rgba(32,33,36,0.28);

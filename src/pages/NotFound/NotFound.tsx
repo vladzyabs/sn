@@ -2,7 +2,7 @@ import React from "react";
 import style from "./NotFound.module.scss"
 import {NavLink} from "react-router-dom"
 import {paths} from "../../layout/paths";
-import Icon, {iconsName, iconsPrefix} from "../Icon/Icon";
+import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
 
 export function NotFound({location}: any) {
     return (

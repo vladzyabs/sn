@@ -5,13 +5,13 @@ import {
     actionInputNewPost,
     actionAddLikePost,
 } from "../../redux/reducers/profileReducer";
-import Icon, {iconsName, iconsPrefix} from "../Icon/Icon";
+import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
 import {PostsType} from "../../redux/StoreTypes";
 
 type PropsMyPostsType = {
     posts: Array<PostsType>,
     newPosts: string,
-    dispatch: any
+    dispatch?: any
 }
 
 function MyPosts(props: PropsMyPostsType) {
@@ -55,10 +55,12 @@ function MyPosts(props: PropsMyPostsType) {
 }
 
 // ----------------------------------------------------
+
 type PropsPostType = {
     post: PostsType
     dispatch: any
 }
+
 function Post(props: PropsPostType) {
 
     const addLike = () => {

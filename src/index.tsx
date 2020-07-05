@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker';
 import {RootStateType} from "./redux/StoreTypes";
 import store from "./redux/redux";
 
-const root = document.getElementById('root');
+const __root__ = document.getElementById('root');
 
 let state = store.getState();
 
@@ -16,7 +16,7 @@ export const rerender = (state: RootStateType) => {
             <App state={state}
                  dispatch={store.dispatch.bind(store)}/>
         </React.StrictMode>,
-        root
+        __root__
     );
 };
 

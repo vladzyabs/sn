@@ -1,72 +1,17 @@
-.navbarLink:hover, .activeNavbarLink {
-  -webkit-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import "src/style/style.scss", "src/style/variables";
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   navbar.module.scss 1:9  root stylesheet */
 
-::-webkit-scrollbar-button {
-  background-repeat: no-repeat;
-  width: 5px;
-  height: 0;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #d8d3d0;
-}
-
-::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  background-color: #33717f;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: #2a5d68;
-}
-
-::-webkit-resizer {
-  background-repeat: no-repeat;
-  width: 4px;
-  height: 0;
-}
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-.navbarWrapper {
-  grid-area: navbar;
-}
-
-.navbar > ul {
-  margin: 0;
-  padding: 0;
-}
-
-.navbarLink {
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
   display: block;
-  padding: 3px 10px;
-  transition: 0.3s;
-  color: #111;
-  border-radius: 3px;
-  margin-bottom: 5px;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"src/style/style.scss\", \"src/style/variables\";\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   navbar.module.scss 1:9  root stylesheet";
 }
-.navbarLink svg {
-  margin-right: 10px;
-}
-
-.activeNavbarLink {
-  background: #33717f;
-  color: #fff;
-}
-
-.navbar > ul li:last-child .navbarLink {
-  margin-bottom: 0;
-}
-
-.navbarLink:hover {
-  background: #33717f;
-  color: #fff;
-}
-
-/*# sourceMappingURL=Navbar.module.css.map */
