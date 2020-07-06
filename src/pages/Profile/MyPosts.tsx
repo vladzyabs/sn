@@ -4,7 +4,7 @@ import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
 import {DispatchType, PostsType} from "../../redux/StoreTypes";
 import Post from "./Post";
 import {connect} from "react-redux";
-import {actionAddPost, actionInputNewPost} from "../../redux/profilePage/profileAction";
+import {actionAddLikePost, actionAddPost, actionInputNewPost} from "../../redux/profilePage/profileAction";
 import {RootStateType} from "../../redux/rootStore";
 
 type PropsMyPostsType = {
@@ -12,6 +12,7 @@ type PropsMyPostsType = {
     newPosts: string
     addPost: () => void
     inputNewPost: (value: string) => void
+    addLike: (id: string) => void
 }
 
 function MyPost(props: PropsMyPostsType) {
@@ -43,7 +44,7 @@ function MyPost(props: PropsMyPostsType) {
             <div className={style.postsItems}>
 
                 {
-                    props.posts.map(post => <Post key={post.id} post={post}/>)
+                    props.posts.map(post => <Post key={post.id} post={post} addLike={props.addLike}/>)
                 }
 
             </div>
@@ -62,6 +63,7 @@ const mdtp = (dispatch: DispatchType) => {
     return {
         addPost: () => dispatch(actionAddPost()),
         inputNewPost: (value: string) => dispatch(actionInputNewPost(value)),
+        addLike: (id: string) => dispatch(actionAddLikePost(id))
     }
 };
 

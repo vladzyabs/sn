@@ -2,9 +2,11 @@ import React from "react";
 import style from "./Dialogs.module.scss";
 import Chat from "./Chat"
 import {ChatsType} from "../../redux/StoreTypes";
+import {RootStateType} from "../../redux/rootStore";
+import {connect} from "react-redux";
 
 type PropsChatsType = {
-    chats?: Array<ChatsType>
+    chats: Array<ChatsType>
 }
 
 function Chats(props: PropsChatsType) {
@@ -22,5 +24,13 @@ function Chats(props: PropsChatsType) {
     )
 }
 
-export default Chats
+const mstp = (state: RootStateType) => {
+    return {
+        chats: state.dialogsData.chats
+    }
+}
+
+const connector = connect(mstp)
+
+export default connector(Chats)
 

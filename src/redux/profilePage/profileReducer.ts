@@ -33,8 +33,15 @@ const profileReducer = (state: InitialStateType = initialState, action: ProfileP
                 newPosts: action.payload || ''
             };
         case _constants.ADD_LIKE_POST:
+            let index = state.posts.findIndex(post => post.id === action.payload)
             return {
-                ...state
+                ...state,
+                posts: state.posts.map(post => {
+                    if (post.id === action.payload) {
+                        return {...post, countLike: state.posts[index].countLike + 1}
+                    }
+                    return post
+                })
             };
         default:
             return state

@@ -5,13 +5,13 @@ import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
 
 type PropsPostType = {
     post: PostsType
+    addLike: (id: string) => void
 }
 
 function Post(props: PropsPostType) {
 
     const addLike = () => {
-        // let action = actionAddLikePost(props.post.id);
-        // props.dispatch(action)
+        props.addLike(props.post.id)
     };
 
     return (
