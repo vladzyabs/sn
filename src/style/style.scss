@@ -15,9 +15,7 @@
   cursor: pointer;
   transition: $transition-m;
 
-  &:hover,
-  &:focus,
-  &:active {
+  &:hover {
     border-color: $color-light-blue;
     background: $color-white;
     color: $color-black;

@@ -1,24 +1,24 @@
 import React, {ChangeEvent} from "react";
 import style from "./Dialogs.module.scss";
 import Message from "./Message";
-import {actionAddMessage, actionInputNewMessage} from "../../redux/reducers/dialogsReduser";
 import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
 import {MessagesType} from "../../redux/StoreTypes";
 
 type PropsMessagesType = {
-    messages: Array<MessagesType>,
+    messages: Array<MessagesType>
     newMessage: string
-    dispatch: any
+    addMessage: () => void
+    inputNewMessage: (value: string) => void
 }
 
 function Messages(props: PropsMessagesType) {
 
     const buttonOnClick = () => {
-        props.dispatch(actionAddMessage())
+        props.addMessage()
     };
 
     const textareaOnChange = (e: ChangeEvent<HTMLTextAreaElement>) =>{
-        props.dispatch(actionInputNewMessage(e.currentTarget.value))
+        props.inputNewMessage(e.currentTarget.value)
     };
     const textareaOnKeyPress = (e: any) => {
         if (e.charCode === 13) {

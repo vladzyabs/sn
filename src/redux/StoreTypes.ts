@@ -3,7 +3,7 @@ import {ActionType} from "./reducers/ActionType";
 // profile type
 export type PostsType = {
     id: string
-    message: string
+    postValue: string
     countLike: number
 }
 export type ProfileType = {
@@ -37,6 +37,4 @@ export type RootStoreType = {
     _state: RootStateType
     getState: () => RootStateType
     dispatch: DispatchType
-    _callSubscriber: (state: RootStateType) => void
-    subscribe: (observer: (state: RootStateType) => void) => void
 }

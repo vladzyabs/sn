@@ -1,8 +1,6 @@
-import {actionAddLikePostType, actionAddPostType, actionInputNewPostType} from "./profileReducer";
-import {actionAddMessageType, actionInputNewMessageType} from "./dialogsReduser";
+import {ProfilePageActionType} from "./profileReducer";
+import {DialogsPageActionType} from "./dialogsReduser";
 
-export type ActionType = actionAddPostType
-    & actionInputNewPostType
-    & actionAddLikePostType
-    & actionAddMessageType
-    & actionInputNewMessageType
+export type ActionType =
+    ProfilePageActionType
+| DialogsPageActionType

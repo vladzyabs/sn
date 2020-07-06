@@ -23,11 +23,9 @@ function Main(props: PropsMainType) {
         <main className={style.main}>
             <Switch>
                 <Route path={paths.main} exact><Login/></Route>
-                <Route path={paths.profile}><Profile profileData={props.profileData}
-                                                     dispatch={props.dispatch}/></Route>
+                <Route path={paths.profile}><Profile profileData={props.profileData}/></Route>
                 <Route path={paths.users}><Users/></Route>
-                <Route path={paths.dialogs}><Dialogs dialogsData={props.dialogsData}
-                                                     dispatch={props.dispatch}/></Route>
+                <Route path={paths.dialogs}><Dialogs dialogsData={props.dialogsData}/></Route>
                 <Route path={paths.news}><News/></Route>
                 <Route path={paths.music}><Music/></Route>
                 <Route path={paths.settings}><Settings/></Route>

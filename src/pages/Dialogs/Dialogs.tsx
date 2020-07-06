@@ -1,12 +1,11 @@
 import React from "react";
 import style from "./Dialogs.module.scss";
-import Messages from "./Messages";
 import Chats from "./Chats";
-import {DialogsType, DispatchType} from "../../redux/StoreTypes";
+import {DialogsType} from "../../redux/StoreTypes";
+import MessagesContainer from "./MessagesContainer";
 
 type PropsDialogsType = {
-    dialogsData: DialogsType,
-    dispatch: DispatchType
+    dialogsData: DialogsType
 }
 
 function Dialogs(props: PropsDialogsType) {
@@ -17,10 +16,8 @@ function Dialogs(props: PropsDialogsType) {
             <div className={style.content}>
 
                 <Chats chats={props.dialogsData.chats}/>
-
-                <Messages messages={props.dialogsData.messages}
-                          newMessage={props.dialogsData.newMessage}
-                          dispatch={props.dispatch}/>
+                
+                <MessagesContainer/>
 
             </div>
         </div>
