@@ -1,8 +1,11 @@
-import React, {ChangeEvent} from "react";
+import React, {ChangeEvent, KeyboardEvent} from "react";
 import style from "./Dialogs.module.scss";
 import Message from "./Message";
 import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
-import {MessagesType} from "../../redux/StoreTypes";
+import {DispatchType, MessagesType} from "../../redux/StoreTypes";
+import {connect} from "react-redux";
+import {RootStateType} from "../../redux/rootStore";
+import {actionAddMessage, actionInputNewMessage} from "../../redux/dialogsPage/dialogsAction";
 
 type PropsMessagesType = {
     messages: Array<MessagesType>
@@ -16,11 +19,10 @@ function Messages(props: PropsMessagesType) {
     const buttonOnClick = () => {
         props.addMessage()
     };
-
     const textareaOnChange = (e: ChangeEvent<HTMLTextAreaElement>) =>{
         props.inputNewMessage(e.currentTarget.value)
     };
-    const textareaOnKeyPress = (e: any) => {
+    const textareaOnKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.charCode === 13) {
             buttonOnClick()
         }
@@ -50,4 +52,20 @@ function Messages(props: PropsMessagesType) {
     )
 }
 
-export default Messages
+const mstp = (state: RootStateType) => {
+    return {
+        messages: state.dialogsData.messages,
+        newMessage: state.dialogsData.newMessage,
+    }
+};
+
+const mdtp = (dispatch: DispatchType) => {
+    return {
+        addMessage: () => dispatch(actionAddMessage()),
+        inputNewMessage: (value: string) => dispatch(actionInputNewMessage(value)),
+    }
+};
+
+const connector = connect(mstp, mdtp);
+
+export default connector(Messages)

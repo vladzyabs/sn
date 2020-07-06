@@ -1,20 +1,17 @@
 import React from "react";
 import UserInfo from "./UserInfo";
-import style from "./Profile.module.scss"
-import {ProfileType} from "../../redux/StoreTypes";
-import MyPostsContainer from "./MyPostsContaner";
+import style from "./Profile.module.scss";
+import MyPosts from "./MyPosts";
 
-type PropsProfileType = {
-    profileData: ProfileType
-}
+type PropsProfileType = {}
 
 function Profile(props: PropsProfileType) {
     return (
         <div className={style.profile}>
 
             <UserInfo/>
-            
-            <MyPostsContainer />
+
+            <MyPosts/>
 
         </div>
     )

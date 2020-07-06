@@ -1,17 +1,20 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import style from "./Profile.module.scss";
 import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
-import {PostsType} from "../../redux/StoreTypes";
+import {DispatchType, PostsType} from "../../redux/StoreTypes";
 import Post from "./Post";
+import {connect} from "react-redux";
+import {actionAddPost, actionInputNewPost} from "../../redux/profilePage/profileAction";
+import {RootStateType} from "../../redux/rootStore";
 
 type PropsMyPostsType = {
     posts: Array<PostsType>
     newPosts: string
-    inputNewPost: (value: string) => void
     addPost: () => void
+    inputNewPost: (value: string) => void
 }
 
-function MyPosts(props: PropsMyPostsType) {
+function MyPost(props: PropsMyPostsType) {
     const textareaOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.inputNewPost(e.currentTarget.value)
     };
@@ -48,4 +51,20 @@ function MyPosts(props: PropsMyPostsType) {
     )
 }
 
-export default MyPosts
+const mstp = (state: RootStateType) => {
+    return {
+        posts: state.profileData.posts,
+        newPosts: state.profileData.newPosts,
+    }
+};
+
+const mdtp = (dispatch: DispatchType) => {
+    return {
+        addPost: () => dispatch(actionAddPost()),
+        inputNewPost: (value: string) => dispatch(actionInputNewPost(value)),
+    }
+};
+
+const connector = connect(mstp, mdtp);
+
+export default connector(MyPost)

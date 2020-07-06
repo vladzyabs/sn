@@ -1,4 +1,4 @@
-import {ActionType} from "./reducers/ActionType";
+import {ActionType} from "./ActionType";
 
 // profile type
 export type PostsType = {
@@ -21,20 +21,11 @@ export type MessagesType = {
     message: string
     fromMe: boolean
 }
-export type DialogsType = {
-    chats: Array<ChatsType>
-    messages: Array<MessagesType>
-    newMessage: string
-}
+// export type DialogsType = {
+//     chats: ChatsType[]
+//     messages: MessagesType[]
+//     newMessage: string
+// }
 
 // root
 export type DispatchType = (action: ActionType) => void
-export type RootStateType = {
-    profileData: ProfileType
-    dialogsData: DialogsType
-}
-export type RootStoreType = {
-    _state: RootStateType
-    getState: () => RootStateType
-    dispatch: DispatchType
-}

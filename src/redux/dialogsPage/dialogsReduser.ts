@@ -1,8 +1,8 @@
-import constants from "../constants";
+import _constants from "../constants";
 import {v1} from "uuid";
-import {DialogsType} from "../StoreTypes";
+import {DialogsPageActionType} from "./dialogsAction";
 
-let initialState: DialogsType = {
+let initialState = {
     chats: [
         {id: v1(), name: 'Sveta'},
         {id: v1(), name: 'Vlad'},
@@ -22,10 +22,11 @@ let initialState: DialogsType = {
     ],
 };
 
-type dialogReducerType = (state: DialogsType, action: DialogsPageActionType) => DialogsType
-const dialogReducer: dialogReducerType = (state = initialState, action): DialogsType => {
+type InitialStateType = typeof initialState
+
+const dialogReducer = (state: InitialStateType = initialState, action: DialogsPageActionType) => {
     switch (action.type) {
-        case constants.ADD_MESSAGE:
+        case _constants.ADD_MESSAGE:
             if (state.newMessage.trim()) {
                 return {
                     ...state,
@@ -33,32 +34,14 @@ const dialogReducer: dialogReducerType = (state = initialState, action): Dialogs
                     messages: [...state.messages, {id: v1(), message: state.newMessage, fromMe: true}]
                 };
             } else return state;
-        case constants.INPUT_NEW_MESSAGE:
+        case _constants.INPUT_NEW_MESSAGE:
             return {
                 ...state,
-                newMessage: action.newMessage || ''
+                newMessage: action.payload || ''
             };
         default:
             return state;
     }
 };
-
-export const actionAddMessage = () => {
-    return {
-        type: constants.ADD_MESSAGE
-    }
-};
-
-export const actionInputNewMessage = (newMessage: string) => {
-    return {
-        type: constants.INPUT_NEW_MESSAGE,
-        newMessage,
-    }
-};
-
-export type DialogsPageActionType =
-    ReturnType<typeof actionAddMessage>
-    | ReturnType<typeof actionInputNewMessage>
-    | any
 
 export default dialogReducer
