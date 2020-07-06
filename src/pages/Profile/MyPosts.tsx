@@ -1,23 +1,23 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import style from "./Profile.module.scss";
-import {
-    actionAddPost,
-    actionInputNewPost,
-    actionAddLikePost,
-} from "../../redux/reducers/profileReducer";
 import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
-import {PostsType} from "../../redux/StoreTypes";
+import {DispatchType, PostsType} from "../../redux/StoreTypes";
+import Post from "./Post";
+import {connect} from "react-redux";
+import {actionAddLikePost, actionAddPost, actionInputNewPost} from "../../redux/profilePage/profileAction";
+import {RootStateType} from "../../redux/rootStore";
 
 type PropsMyPostsType = {
-    posts: Array<PostsType>,
-    newPosts: string,
-    dispatch?: any
+    posts: Array<PostsType>
+    newPosts: string
+    addPost: () => void
+    inputNewPost: (value: string) => void
+    addLike: (id: string) => void
 }
 
-function MyPosts(props: PropsMyPostsType) {
+function MyPost(props: PropsMyPostsType) {
     const textareaOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let action = actionInputNewPost(e.currentTarget.value);
-        props.dispatch(action);
+        props.inputNewPost(e.currentTarget.value)
     };
     const textareaOnKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
         if (e.ctrlKey && e.charCode === 13) {
@@ -25,8 +25,7 @@ function MyPosts(props: PropsMyPostsType) {
         }
     };
     const buttonOnClick = () => {
-        let action = actionAddPost();
-        props.dispatch(action);
+        props.addPost()
     };
     return (
         <div className={style.myPosts}>
@@ -45,45 +44,29 @@ function MyPosts(props: PropsMyPostsType) {
             <div className={style.postsItems}>
 
                 {
-                    props.posts.map(post => <Post key={post.id} post={post} dispatch={props.dispatch}/>)
+                    props.posts.map(post => <Post key={post.id} post={post} addLike={props.addLike}/>)
                 }
 
-
             </div>
         </div>
     )
 }
 
-// ----------------------------------------------------
+const mstp = (state: RootStateType) => {
+    return {
+        posts: state.profileData.posts,
+        newPosts: state.profileData.newPosts,
+    }
+};
 
-type PropsPostType = {
-    post: PostsType
-    dispatch: any
-}
+const mdtp = (dispatch: DispatchType) => {
+    return {
+        addPost: () => dispatch(actionAddPost()),
+        inputNewPost: (value: string) => dispatch(actionInputNewPost(value)),
+        addLike: (id: string) => dispatch(actionAddLikePost(id))
+    }
+};
 
-function Post(props: PropsPostType) {
+const connector = connect(mstp, mdtp);
 
-    const addLike = () => {
-        let action = actionAddLikePost(props.post.id);
-        props.dispatch(action)
-    };
-
-    return (
-        <div className={style.post}>
-            <div className={style.postPicWrapper}>
-                <img src="https://img.icons8.com/plasticine/2x/user.png" alt=""/>
-            </div>
-            <div className={style.postText}>
-                <pre>{props.post.message}</pre>
-            </div>
-            <div className={style.postLick}>
-                {props.post.countLike}
-                <button onClick={addLike}>
-                    <Icon prefix={iconsPrefix.fas} iconName={iconsName.heart} size={'sm'}/>
-                </button>
-            </div>
-        </div>
-    )
-}
-
-export default MyPosts
+export default connector(MyPost)
