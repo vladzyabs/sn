@@ -1,19 +1,18 @@
-import _constants from "../constants";
+export const ADD_MESSAGE = 'ADD_MESSAGE';
+export const INPUT_NEW_MESSAGE = 'INPUT_NEW_MESSAGE';
 
-
-type actionAddMessageType = {type: typeof _constants.ADD_MESSAGE, payload: null}
+type actionAddMessageType = {type: typeof ADD_MESSAGE}
 export const actionAddMessage = (): actionAddMessageType => {
     return {
-        type: _constants.ADD_MESSAGE,
-        payload: null
+        type: ADD_MESSAGE,
     }
 };
 
-type ActionInputNewMessageType = {type: typeof _constants.INPUT_NEW_MESSAGE, payload: string}
+type ActionInputNewMessageType = {type: typeof INPUT_NEW_MESSAGE, newMessage: string}
 export const actionInputNewMessage = (newMessage: string): ActionInputNewMessageType => {
     return {
-        type: _constants.INPUT_NEW_MESSAGE,
-        payload: newMessage,
+        type: INPUT_NEW_MESSAGE,
+        newMessage,
     }
 };
 

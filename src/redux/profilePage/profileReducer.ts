@@ -1,4 +1,4 @@
-import _constants from "../constants";
+import {ADD_LIKE_POST, ADD_POST, INPUT_NEW_POST} from "./profileAction";
 import {v1} from "uuid";
 import {ProfilePageActionType} from "./profileAction";
 
@@ -17,27 +17,27 @@ let initialState = {
 
 type InitialStateType = typeof initialState
 
-const profileReducer = (state: InitialStateType = initialState, action: ProfilePageActionType) => {
+const profileReducer = (state: InitialStateType = initialState, action: ProfilePageActionType): InitialStateType => {
     switch (action.type) {
-        case _constants.ADD_POST:
+        case ADD_POST:
             if (state.newPosts.trim()) {
                 return {
                     ...state,
                     newPosts: '',
-                    posts: [{id: v1(), postValue: state.newPosts, countLike: 0}, ...state.posts]
+                    posts: [{id: v1(), postValue: state.newPosts.trim(), countLike: 0}, ...state.posts]
                 };
-            } else return state;
-        case _constants.INPUT_NEW_POST:
+            } else return {...state, newPosts: ''};
+        case INPUT_NEW_POST:
             return {
                 ...state,
-                newPosts: action.payload || ''
+                newPosts: action.newPost
             };
-        case _constants.ADD_LIKE_POST:
-            let index = state.posts.findIndex(post => post.id === action.payload)
+        case ADD_LIKE_POST:
+            let index = state.posts.findIndex(post => post.id === action.idPost);
             return {
                 ...state,
                 posts: state.posts.map(post => {
-                    if (post.id === action.payload) {
+                    if (post.id === action.idPost) {
                         return {...post, countLike: state.posts[index].countLike + 1}
                     }
                     return post

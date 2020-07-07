@@ -2,13 +2,13 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import style from "./Dialogs.module.scss";
 import Message from "./Message";
 import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
-import {DispatchType, MessagesType} from "../../redux/StoreTypes";
 import {connect} from "react-redux";
-import {RootStateType} from "../../redux/rootStore";
+import {DispatchType, RootStateType} from "../../redux/rootStore";
 import {actionAddMessage, actionInputNewMessage} from "../../redux/dialogsPage/dialogsAction";
+import {MessagesType} from "../../redux/dialogsPage/dialogsType";
 
 type PropsMessagesType = {
-    messages: Array<MessagesType>
+    messages: MessagesType[]
     newMessage: string
     addMessage: () => void
     inputNewMessage: (value: string) => void

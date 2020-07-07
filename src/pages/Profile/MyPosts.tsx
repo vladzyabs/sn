@@ -1,14 +1,14 @@
 import React, {ChangeEvent, KeyboardEvent} from "react";
 import style from "./Profile.module.scss";
 import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
-import {DispatchType, PostsType} from "../../redux/StoreTypes";
 import Post from "./Post";
 import {connect} from "react-redux";
 import {actionAddLikePost, actionAddPost, actionInputNewPost} from "../../redux/profilePage/profileAction";
-import {RootStateType} from "../../redux/rootStore";
+import {DispatchType, RootStateType} from "../../redux/rootStore";
+import {PostsType} from "../../redux/profilePage/profileType";
 
 type PropsMyPostsType = {
-    posts: Array<PostsType>
+    posts: PostsType[]
     newPosts: string
     addPost: () => void
     inputNewPost: (value: string) => void
