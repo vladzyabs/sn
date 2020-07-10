@@ -1,0 +1,46 @@
+@import "../../style/variables";
+@import "../../style/style";
+
+.users {
+
+  .user {
+    @extend %box-shadow;
+    border-radius: $borderRadius;
+    display: flex;
+    background: $color-white;
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+  .userPhoto, .userName, .userLocation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .userPhoto {
+    align-items: center;
+    margin-right: 10px;
+  }
+
+  .userPhotoPic {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 5px;
+  }
+
+  .userBtn {
+    @extend %button;
+  }
+
+
+  .userInf {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
