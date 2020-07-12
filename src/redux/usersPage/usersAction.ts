@@ -18,10 +18,11 @@ export const actionUnfollowUsers = (userID: string): ActionUnfollowUsersType => 
     }
 };
 
-type ActionSetUserType = { type: typeof SET_USERS }
-export const actionSetUsers = (): ActionSetUserType => {
+type ActionSetUserType = { type: typeof SET_USERS, users: any }
+export const actionSetUsers = (users: any): ActionSetUserType => {
     return {
         type: SET_USERS,
+        users
     }
 };
 
