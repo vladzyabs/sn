@@ -1,6 +1,6 @@
 import dialogReducer, {InitialStateType} from "./dialogsReduser";
 import {v1} from "uuid";
-import {actionAddMessage, actionInputNewMessage} from "./dialogsAction";
+import * as action from "./dialogsAction";
 
 let initialState: InitialStateType
 
@@ -21,14 +21,14 @@ beforeEach(() => {
     }
 })
 
-test('', () => {
+test('new message should be added', () => {
     let newState
     let newMessage = '  Mee  '
 
-    newState = dialogReducer(initialState, actionInputNewMessage(newMessage))
+    newState = dialogReducer(initialState, action.actionInputNewMessage(newMessage))
     expect(newState.newMessage).toBe(newMessage)
 
-    newState = dialogReducer(newState, actionAddMessage())
+    newState = dialogReducer(newState, action.actionAddMessage())
     expect(newState.newMessage).toBe('')
     expect(newState.messages.length).toBe(initialState.messages.length + 1)
     expect(newState.chats.length).toBe(initialState.chats.length)
