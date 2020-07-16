@@ -15,7 +15,7 @@ let initialState = {
     newPosts: '',
 };
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 const profileReducer = (state: InitialStateType = initialState, action: ProfilePageActionType): InitialStateType => {
     switch (action.type) {
