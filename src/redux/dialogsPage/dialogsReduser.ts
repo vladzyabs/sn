@@ -22,7 +22,7 @@ let initialState = {
     ],
 };
 
-type InitialStateType = typeof initialState
+export type InitialStateType = typeof initialState
 
 const dialogReducer = (state: InitialStateType = initialState, action: DialogsPageActionType): InitialStateType => {
     switch (action.type) {
