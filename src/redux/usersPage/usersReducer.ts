@@ -1,5 +1,5 @@
 import {v1} from "uuid";
-import {FOLLOW_USER, UNFOLLOW_USER, UsersPageActionType} from "./usersAction";
+import {FOLLOW_USER, SET_USERS, UNFOLLOW_USER, UsersPageActionType} from "./usersAction";
 
 let initialState = {
     users: [
@@ -7,25 +7,9 @@ let initialState = {
             id: v1(),
             photo: 'https://www.rover.com/blog/wp-content/uploads/2019/05/3nEohCd.jpg',
             followed: true,
-            fullName: 'Vladislav',
+            name: 'Vladislav',
             status: 'Junior samuray',
             location: {city: 'Mogilev', county: 'Belarus'}
-        },
-        {
-            id: v1(),
-            photo: 'https://www.rover.com/blog/wp-content/uploads/2019/05/3nEohCd.jpg',
-            followed: false,
-            fullName: 'Elena',
-            status: 'I feel happy',
-            location: {city: 'Minsk', county: 'Belarus'}
-        },
-        {
-            id: v1(),
-            photo: 'https://www.rover.com/blog/wp-content/uploads/2019/05/3nEohCd.jpg',
-            followed: true,
-            fullName: 'Misha',
-            status: 'big man',
-            location: {city: 'Vitebsk', county: 'Belarus'}
         },
     ]
 };
@@ -53,6 +37,11 @@ const usersReducer = (state: InitialStateType = initialState, action: UsersPageA
                     }
                     return user
                 })
+            };
+        case SET_USERS:
+            return {
+                ...state,
+                users: [...state.users, action.users]
             };
         default:
             return state
