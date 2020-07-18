@@ -1,13 +1,17 @@
 export type UserType = {
-    id: string
-    followed: boolean
-    fullName: string
-    status: string
-    location: {
-        city: string
-        county: string
+    name: string
+    id: string | number
+    uniqueUrlName: string | null
+    photos: {
+        small: string | null
+        large: string | null
     }
+    status: string | null
+    followed: boolean
 }
 
-export type UsersType = UserType[]
+export type UsersStateType = {
+    users: UserType[]
+}
+
 

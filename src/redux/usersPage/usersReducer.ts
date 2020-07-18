@@ -1,22 +1,11 @@
-import {v1} from "uuid";
 import {FOLLOW_USER, SET_USERS, UNFOLLOW_USER, UsersPageActionType} from "./usersAction";
+import {UsersStateType} from "./usrsType";
 
-let initialState = {
-    users: [
-        {
-            id: v1(),
-            photo: 'https://www.rover.com/blog/wp-content/uploads/2019/05/3nEohCd.jpg',
-            followed: true,
-            name: 'Vladislav',
-            status: 'Junior samuray',
-            location: {city: 'Mogilev', county: 'Belarus'}
-        },
-    ]
+let initialState: UsersStateType = {
+    users: []
 };
 
-export type InitialStateType = typeof initialState
-
-const usersReducer = (state: InitialStateType = initialState, action: UsersPageActionType): InitialStateType => {
+const usersReducer = (state = initialState, action: UsersPageActionType): UsersStateType => {
     switch (action.type) {
         case FOLLOW_USER:
             return {
