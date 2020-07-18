@@ -1,25 +1,25 @@
-import usersReducer, {InitialStateType} from "./usersReducer";
-import {v1} from "uuid";
+import usersReducer from "./usersReducer";
 import * as action from "./usersAction";
+import {UsersStateType} from "./usersType";
 
-let initialState: InitialStateType
-let id1 = v1()
-let id2 = v1()
-let id3 = v1()
+let initialState: UsersStateType
 beforeEach(() => {
     initialState = {
         users: [
-            {id: id1, name: 'A', followed: true, status: 'Aa', location: {city: 'a', county: 'A'}, photo: ''},
-            {id: id2, name: 'B', followed: true, status: 'Bb', location: {city: 'b', county: 'B'}, photo: ''},
-            {id: id3, name: 'C', followed: true, status: 'Cc', location: {city: 'c', county: 'C'}, photo: ''},
-        ]
+            {id: 0, name: 'A', uniqueUrlName: null, photos: {small: null, large: null}, status: 'a', followed: true},
+            {id: 1, name: 'B', uniqueUrlName: null, photos: {small: null, large: null}, status: 'b', followed: false},
+            {id: 2, name: 'C', uniqueUrlName: null, photos: {small: null, large: null}, status: 'c', followed: true},
+        ],
+        totalCount: 1000,
+        pageSize: 10,
+        currentPage: 1,
     }
 })
 
 test('must unsubscribe from the user', () => {
     let newState
 
-    newState = usersReducer(initialState, action.actionUnfollowUsers(id1))
+    newState = usersReducer(initialState, action.actionUnfollowUsers(0))
 
     expect(newState.users.length).toBe(initialState.users.length)
     expect(newState.users[0].followed).toBe(false)
@@ -30,11 +30,26 @@ test('must unsubscribe from the user', () => {
 test('must subscribe from the user', () => {
     let newState
 
-    newState = usersReducer(initialState, action.actionFollowUsers(id1))
+    newState = usersReducer(initialState, action.actionFollowUsers(1))
 
     expect(newState.users.length).toBe(initialState.users.length)
-    expect(newState.users[0].followed).toBe(true)
-    expect(newState.users[1].followed).toBe(initialState.users[1].followed)
+    expect(newState.users[0].followed).toBe(initialState.users[0].followed)
+    expect(newState.users[1].followed).toBe(true)
     expect(newState.users[2].followed).toBe(initialState.users[2].followed)
+})
 
+test('number of users should be 2000', () => {
+    let newState
+
+    newState = usersReducer(initialState, action.actionSetTotalUsersCount(2000))
+
+    expect(newState.totalCount).toBe(2000)
+})
+
+test('current page should be 5', () => {
+    let newState
+
+    newState = usersReducer(initialState, action.actionSetCurrentPage(5))
+
+    expect(newState.currentPage).toBe(5)
 })
