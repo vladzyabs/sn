@@ -18,7 +18,6 @@ type RootActionType =
     | UsersPageActionType
 
 export type RootStateType = ReturnType<typeof rootReducer>
-export type DispatchType = (action: RootActionType) => void
 
 let rootStore = createStore(rootReducer);
 
