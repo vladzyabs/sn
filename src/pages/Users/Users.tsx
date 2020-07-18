@@ -1,7 +1,7 @@
 import React from "react";
 import userLogo from "../../assets/img/user-logo.png"
 import {connect, ConnectedProps} from "react-redux";
-import {DispatchType, RootStateType} from "../../redux/rootStore";
+import {RootStateType} from "../../redux/rootStore";
 import {
     actionFollowUsers,
     actionSetCurrentPage, actionSetTotalUsersCount,
@@ -87,24 +87,12 @@ const mstp = (state: RootStateType) => {
     }
 };
 
-const mdtp = (dispatch: DispatchType) => {
-    return {
-        onFollow: (id: string | number) => {
-            dispatch(actionFollowUsers(id))
-        },
-        onUnfollow: (id: string | number) => {
-            dispatch(actionUnfollowUsers(id))
-        },
-        setUsers: (users: any) => {
-            dispatch(actionSetUsers(users))
-        },
-        setCurrentPage: (page: number) => {
-            dispatch(actionSetCurrentPage(page))
-        },
-        setTotalUsersCount: (count: number) => {
-            dispatch(actionSetTotalUsersCount(count))
-        }
-    }
+const mdtp = {
+    onFollow: (id: string | number) => (actionFollowUsers(id)),
+    onUnfollow: (id: string | number) => (actionUnfollowUsers(id)),
+    setUsers: (users: any) => (actionSetUsers(users)),
+    setCurrentPage: (page: number) => (actionSetCurrentPage(page)),
+    setTotalUsersCount: (count: number) => (actionSetTotalUsersCount(count))
 };
 
 let connector = connect(mstp, mdtp);
