@@ -3,6 +3,10 @@
 
 .users {
 
+  .selectedPage {
+    font-weight: bold;
+  }
+
   .user {
     @extend %box-shadow;
     border-radius: $borderRadius;

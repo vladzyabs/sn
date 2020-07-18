@@ -2,7 +2,12 @@ import React from "react";
 import userLogo from "../../assets/img/user-logo.png"
 import {connect, ConnectedProps} from "react-redux";
 import {DispatchType, RootStateType} from "../../redux/rootStore";
-import {actionFollowUsers, actionSetUsers, actionUnfollowUsers} from "../../redux/usersPage/usersAction";
+import {
+    actionFollowUsers,
+    actionSetCurrentPage, actionSetTotalUsersCount,
+    actionSetUsers,
+    actionUnfollowUsers
+} from "../../redux/usersPage/usersAction";
 import style from "./Users.module.scss";
 import * as axios from "axios";
 
@@ -12,14 +17,40 @@ type PropsUsersType = PropsFromRedux
 class Users extends React.Component<PropsUsersType> {
 
     componentDidMount(): void {
-        axios.default.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => response.data.items.forEach((user: any) => this.props.setUsers(user)))
+        axios.default
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
+            .then(response => {
+                this.props.setUsers(response.data.items)
+                this.props.setTotalUsersCount(response.data.totalCount)
+            })
+    }
+
+    onPageChanged = (p: number) => {
+        this.props.setCurrentPage(p)
+        axios.default
+            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${p}&count=${this.props.pageSize}`)
+            .then(response => this.props.setUsers(response.data.items))
     }
 
     render() {
+
+        let pagesCount = Math.ceil(this.props.totalCount / this.props.pageSize)
+        let pages = []
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return (
             <div className={style.users}>
                 <h1>Users</h1>
+                <div>
+                    {
+                        pages.map(p => {
+                            return <span key={p} className={this.props.currentPage === p ? style.selectedPage : ''}
+                                         onClick={() => this.onPageChanged(p)}>{p}</span>
+                        })
+                    }
+                </div>
                 {this.props.users.map(user => <div key={user.id} className={style.user}>
                     <div className={style.userPhoto}>
                         <img className={style.userPhotoPic} src={user.photos.small || userLogo} alt=""/>
@@ -49,7 +80,10 @@ class Users extends React.Component<PropsUsersType> {
 
 const mstp = (state: RootStateType) => {
     return {
-        users: state.usersData.users
+        users: state.usersData.users,
+        pageSize: state.usersData.pageSize,
+        totalCount: state.usersData.totalCount,
+        currentPage: state.usersData.currentPage
     }
 };
 
@@ -64,6 +98,12 @@ const mdtp = (dispatch: DispatchType) => {
         setUsers: (users: any) => {
             dispatch(actionSetUsers(users))
         },
+        setCurrentPage: (page: number) => {
+            dispatch(actionSetCurrentPage(page))
+        },
+        setTotalUsersCount: (count: number) => {
+            dispatch(actionSetTotalUsersCount(count))
+        }
     }
 };
 

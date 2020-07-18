@@ -49,6 +49,9 @@
   width: 4px;
 }
 
+.users .selectedPage {
+  font-weight: bold;
+}
 .users .user {
   border-radius: 3px;
   display: flex;
