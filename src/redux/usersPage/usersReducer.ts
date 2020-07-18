@@ -1,8 +1,18 @@
-import {FOLLOW_USER, SET_USERS, UNFOLLOW_USER, UsersPageActionType} from "./usersAction";
-import {UsersStateType} from "./usrsType";
+import {
+    FOLLOW_USER,
+    SET_CURRENT_PAGE,
+    SET_TOTAL_USERS_COUNT,
+    SET_USERS,
+    UNFOLLOW_USER,
+    UsersPageActionType
+} from "./usersAction";
+import {UsersStateType} from "./usersType";
 
 let initialState: UsersStateType = {
-    users: []
+    users: [],
+    pageSize: 10,
+    totalCount: 0,
+    currentPage: 1
 };
 
 const usersReducer = (state = initialState, action: UsersPageActionType): UsersStateType => {
@@ -28,10 +38,17 @@ const usersReducer = (state = initialState, action: UsersPageActionType): UsersS
                 })
             };
         case SET_USERS:
+            return {...state, users: action.users};
+        case SET_CURRENT_PAGE:
             return {
                 ...state,
-                users: [...state.users, action.users]
-            };
+                currentPage: action.page
+            }
+        case SET_TOTAL_USERS_COUNT:
+            return {
+                ...state,
+                totalCount: action.count
+            }
         default:
             return state
     }
