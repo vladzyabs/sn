@@ -4,7 +4,7 @@ import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
 import Post from "./Post";
 import {connect} from "react-redux";
 import {actionAddLikePost, actionAddPost, actionInputNewPost} from "../../redux/profilePage/profileAction";
-import {DispatchType, RootStateType} from "../../redux/rootStore";
+import {RootStateType} from "../../redux/rootStore";
 import {PostsType} from "../../redux/profilePage/profileType";
 
 type PropsMyPostsType = {
@@ -59,12 +59,10 @@ const mstp = (state: RootStateType) => {
     }
 };
 
-const mdtp = (dispatch: DispatchType) => {
-    return {
-        addPost: () => dispatch(actionAddPost()),
-        inputNewPost: (value: string) => dispatch(actionInputNewPost(value)),
-        addLike: (id: string) => dispatch(actionAddLikePost(id))
-    }
+const mdtp = {
+    addPost: () => (actionAddPost()),
+    inputNewPost: (value: string) => (actionInputNewPost(value)),
+    addLike: (id: string) => (actionAddLikePost(id))
 };
 
 const connector = connect(mstp, mdtp);

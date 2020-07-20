@@ -3,7 +3,7 @@ import style from "./Dialogs.module.scss";
 import Message from "./Message";
 import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
 import {connect} from "react-redux";
-import {DispatchType, RootStateType} from "../../redux/rootStore";
+import {RootStateType} from "../../redux/rootStore";
 import {actionAddMessage, actionInputNewMessage} from "../../redux/dialogsPage/dialogsAction";
 import {MessagesType} from "../../redux/dialogsPage/dialogsType";
 
@@ -19,7 +19,7 @@ function Messages(props: PropsMessagesType) {
     const buttonOnClick = () => {
         props.addMessage()
     };
-    const textareaOnChange = (e: ChangeEvent<HTMLTextAreaElement>) =>{
+    const textareaOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.inputNewMessage(e.currentTarget.value)
     };
     const textareaOnKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -45,7 +45,8 @@ function Messages(props: PropsMessagesType) {
                           onChange={textareaOnChange}
                           onKeyPress={textareaOnKeyPress}/>
                 <button className={style.button}
-                        onClick={buttonOnClick}>Send<Icon prefix={iconsPrefix.fas} iconName={iconsName.paperPlane} size={'sm'}/></button>
+                        onClick={buttonOnClick}>Send<Icon prefix={iconsPrefix.fas} iconName={iconsName.paperPlane}
+                                                          size={'sm'}/></button>
 
             </div>
         </div>
@@ -59,11 +60,9 @@ const mstp = (state: RootStateType) => {
     }
 };
 
-const mdtp = (dispatch: DispatchType) => {
-    return {
-        addMessage: () => dispatch(actionAddMessage()),
-        inputNewMessage: (value: string) => dispatch(actionInputNewMessage(value)),
-    }
+const mdtp = {
+    addMessage: () => (actionAddMessage()),
+    inputNewMessage: (value: string) => (actionInputNewMessage(value)),
 };
 
 const connector = connect(mstp, mdtp);
