@@ -1,0 +1,12 @@
+.preloader {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.8;
+  background: rgba(17, 17, 17, 0.2);
+  box-shadow: 0 0 0 100vmax rgba(17, 17, 17, 0.5);
+  border-radius: 50%;
+}
+
+/*# sourceMappingURL=Preloader.module.css.map */
