@@ -1,15 +1,10 @@
 import React from "react";
 import {connect, ConnectedProps} from "react-redux";
 import {RootStateType} from "../../redux/rootStore";
-import {
-    actionFollowUsers,
-    actionSetCurrentPage, actionSetTotalUsersCount,
-    actionSetUsers,
-    actionUnfollowUsers
-} from "../../redux/usersPage/usersAction";
+import * as action from "../../redux/usersPage/usersAction";
 import * as axios from "axios";
-import {UserType} from "../../redux/usersPage/usersType";
 import Users from "./Users";
+import Preloader from "../../components/common/Preloader/Preloader";
 
 type PropsUsersType = PropsFromRedux
     & {}
@@ -17,29 +12,38 @@ type PropsUsersType = PropsFromRedux
 class UsersContainer extends React.Component<PropsUsersType> {
 
     componentDidMount(): void {
+        this.props.actionSetLoading(true)
         axios.default
             .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
             .then(response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
+                this.props.actionSetUsers(response.data.items)
+                this.props.actionSetTotalUsersCount(response.data.totalCount)
+                this.props.actionSetLoading(false)
             })
     }
 
     onPageChanged = (page: number) => {
-        this.props.setCurrentPage(page)
+        this.props.actionSetCurrentPage(page)
+        this.props.actionSetLoading(true)
         axios.default
             .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
-            .then(response => this.props.setUsers(response.data.items))
+            .then(response => {
+                this.props.actionSetUsers(response.data.items)
+                this.props.actionSetLoading(false)
+            })
     }
 
     render() {
-        return <Users users={this.props.users}
-                      pageSize={this.props.pageSize}
-                      totalCount={this.props.totalCount}
-                      currentPage={this.props.currentPage}
-                      onFollow={this.props.onFollow}
-                      onUnfollow={this.props.onUnfollow}
-                      onPageChanged={this.onPageChanged}/>
+        return <>
+            {this.props.isLoading && <Preloader/>}
+            <Users users={this.props.users}
+                   pageSize={this.props.pageSize}
+                   totalCount={this.props.totalCount}
+                   currentPage={this.props.currentPage}
+                   onFollow={this.props.actionFollowUsers}
+                   onUnfollow={this.props.actionUnfollowUsers}
+                   onPageChanged={this.onPageChanged}/>
+        </>
     }
 }
 
@@ -48,19 +52,12 @@ const mstp = (state: RootStateType) => {
         users: state.usersData.users,
         pageSize: state.usersData.pageSize,
         totalCount: state.usersData.totalCount,
-        currentPage: state.usersData.currentPage
+        currentPage: state.usersData.currentPage,
+        isLoading: state.usersData.isLoading
     }
 };
 
-const mdtp = {
-    onFollow: (id: string | number) => (actionFollowUsers(id)),
-    onUnfollow: (id: string | number) => (actionUnfollowUsers(id)),
-    setUsers: (users: UserType[]) => (actionSetUsers(users)),
-    setCurrentPage: (page: number) => (actionSetCurrentPage(page)),
-    setTotalUsersCount: (count: number) => (actionSetTotalUsersCount(count))
-};
-
-let connector = connect(mstp, mdtp);
+let connector = connect(mstp, action);
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
