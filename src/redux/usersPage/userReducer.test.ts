@@ -13,6 +13,7 @@ beforeEach(() => {
         totalCount: 1000,
         pageSize: 10,
         currentPage: 1,
+        isLoading: false,
     }
 })
 
@@ -52,4 +53,18 @@ test('current page should be 5', () => {
     newState = usersReducer(initialState, action.actionSetCurrentPage(5))
 
     expect(newState.currentPage).toBe(5)
+})
+
+test('value loading in state should change', () => {
+    let newState = usersReducer(initialState, action.actionSetLoading(true))
+
+    expect(newState.isLoading).toBe(true)
+
+    newState = usersReducer(initialState, action.actionSetLoading(true))
+
+    expect(newState.isLoading).toBe(true)
+
+    newState = usersReducer(initialState, action.actionSetLoading(false))
+
+    expect(newState.isLoading).toBe(false)
 })
