@@ -1,7 +1,9 @@
 import React from "react";
+import {NavLink} from "react-router-dom";
 import userLogo from "../../assets/img/user-logo.png"
-import style from "./Users.module.scss";
 import {UserType} from "../../redux/usersPage/usersType";
+import style from "./Users.module.scss";
+import {paths} from "../../layout/paths";
 
 type PropsUsersType = {
     users: UserType[]
@@ -33,7 +35,9 @@ function Users(props: PropsUsersType) {
             </div>
             {props.users.map(user => <div key={user.id} className={style.user}>
                 <div className={style.userPhoto}>
-                    <img className={style.userPhotoPic} src={user.photos.small || userLogo} alt=""/>
+                    <NavLink to={paths.profile + '/' + user.id}>
+                        <img className={style.userPhotoPic} src={user.photos.small || userLogo} alt=""/>
+                    </NavLink>
                     {user.followed
                         ?
                         <button className={style.userBtn}
