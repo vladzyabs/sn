@@ -15,4 +15,5 @@ export type UsersStateType = {
     totalCount: number
     pageSize: number
     currentPage: number
+    isLoading: boolean
 }

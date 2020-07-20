@@ -1,6 +1,6 @@
 import {
     FOLLOW_USER,
-    SET_CURRENT_PAGE,
+    SET_CURRENT_PAGE, SET_LOADING,
     SET_TOTAL_USERS_COUNT,
     SET_USERS,
     UNFOLLOW_USER,
@@ -12,7 +12,8 @@ let initialState: UsersStateType = {
     users: [],
     pageSize: 10,
     totalCount: 0,
-    currentPage: 1
+    currentPage: 1,
+    isLoading: false,
 };
 
 const usersReducer = (state = initialState, action: UsersPageActionType): UsersStateType => {
@@ -49,6 +50,8 @@ const usersReducer = (state = initialState, action: UsersPageActionType): UsersS
                 ...state,
                 totalCount: action.count
             }
+        case SET_LOADING:
+            return {...state, isLoading: action.payload}
         default:
             return state
     }
