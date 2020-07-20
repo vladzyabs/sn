@@ -5,6 +5,7 @@ export const UNFOLLOW_USER = 'UNFOLLOW_USER';
 export const SET_USERS = 'SET_USERS';
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+export const SET_LOADING = 'SET_LOADING';
 
 type ActionFollowUsersType = { type: typeof FOLLOW_USER, userID: string | number }
 export const actionFollowUsers = (userID: string | number): ActionFollowUsersType => {
@@ -46,9 +47,18 @@ export const actionSetTotalUsersCount = (count: number): ActiolnSetTotalUsersCou
     }
 }
 
+type ActionSetLoading = { type: typeof SET_LOADING, payload: boolean }
+export const actionSetLoading = (loading: boolean): ActionSetLoading => {
+    return {
+        type: SET_LOADING,
+        payload: loading,
+    }
+}
+
 export type UsersPageActionType =
     ActionFollowUsersType
     | ActionUnfollowUsersType
     | ActionSetUserType
     | ActionSetCurrentPage
     | ActiolnSetTotalUsersCount
+    | ActionSetLoading
