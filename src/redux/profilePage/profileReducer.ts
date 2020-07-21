@@ -1,8 +1,9 @@
-import {ADD_LIKE_POST, ADD_POST, INPUT_NEW_POST} from "./profileAction";
+import {ADD_LIKE_POST, ADD_POST, INPUT_NEW_POST, SET_USER_INFO} from "./profileAction";
 import {v1} from "uuid";
 import {ProfilePageActionType} from "./profileAction";
+import {ProfileStateType} from "./profileType";
 
-let initialState = {
+let initialState: ProfileStateType = {
     posts: [
         {id: v1(), postValue: 'post 1', countLike: 5},
         {id: v1(), postValue: 'post 2', countLike: 1},
@@ -13,12 +14,16 @@ let initialState = {
         {id: v1(), postValue: 'post 7', countLike: 20},
     ],
     newPosts: '',
+    profileInfo: null,
 };
 
-export type InitialStateType = typeof initialState
-
-const profileReducer = (state: InitialStateType = initialState, action: ProfilePageActionType): InitialStateType => {
+const profileReducer = (state = initialState, action: ProfilePageActionType): ProfileStateType => {
     switch (action.type) {
+        case SET_USER_INFO:
+            return {
+                ...state,
+                profileInfo: action.preloader
+            };
         case ADD_POST:
             if (state.newPosts.trim()) {
                 return {

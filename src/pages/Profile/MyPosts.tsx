@@ -2,9 +2,6 @@ import React, {ChangeEvent, KeyboardEvent} from "react";
 import style from "./Profile.module.scss";
 import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
 import Post from "./Post";
-import {connect} from "react-redux";
-import {actionAddLikePost, actionAddPost, actionInputNewPost} from "../../redux/profilePage/profileAction";
-import {RootStateType} from "../../redux/rootStore";
 import {PostsType} from "../../redux/profilePage/profileType";
 
 type PropsMyPostsType = {
@@ -52,19 +49,4 @@ function MyPost(props: PropsMyPostsType) {
     )
 }
 
-const mstp = (state: RootStateType) => {
-    return {
-        posts: state.profileData.posts,
-        newPosts: state.profileData.newPosts,
-    }
-};
-
-const mdtp = {
-    addPost: () => (actionAddPost()),
-    inputNewPost: (value: string) => (actionInputNewPost(value)),
-    addLike: (id: string) => (actionAddLikePost(id))
-};
-
-const connector = connect(mstp, mdtp);
-
-export default connector(MyPost)
+export default MyPost
