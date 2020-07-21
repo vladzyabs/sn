@@ -18,7 +18,7 @@ function Main(props: PropsMainType) {
         <main className={style.main}>
             <Switch>
                 <Route path={paths.main} exact><Login/></Route>
-                <Route path={paths.profile}><ProfileContainer/></Route>
+                <Route path={paths.profileWithId}><ProfileContainer/></Route>
                 <Route path={paths.users}><UsersContainer/></Route>
                 <Route path={paths.dialogs}><Dialogs/></Route>
                 <Route path={paths.news}><News/></Route>
