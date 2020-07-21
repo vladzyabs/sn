@@ -2,7 +2,7 @@ import React from "react";
 import {Switch, Route} from "react-router-dom";
 import {paths} from "../../layout/paths";
 import style from "./Main.module.scss";
-import Profile from "../../pages/Profile/Profile";
+import ProfileContainer from "../../pages/Profile/ProfileContainer";
 import Dialogs from "../../pages/Dialogs/Dialogs";
 import Settings from "../../pages/Settings/Settings";
 import UsersContainer from "../../pages/Users/UsersContainer";
@@ -18,7 +18,7 @@ function Main(props: PropsMainType) {
         <main className={style.main}>
             <Switch>
                 <Route path={paths.main} exact><Login/></Route>
-                <Route path={paths.profile}><Profile/></Route>
+                <Route path={paths.profile}><ProfileContainer/></Route>
                 <Route path={paths.users}><UsersContainer/></Route>
                 <Route path={paths.dialogs}><Dialogs/></Route>
                 <Route path={paths.news}><News/></Route>
