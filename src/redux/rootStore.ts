@@ -1,25 +1,18 @@
 import {combineReducers, createStore} from "redux"
 import profileReducer from "./profilePage/profileReducer";
 import dialogReducer from "./dialogsPage/dialogsReduser";
-import {ProfilePageActionType} from "./profilePage/profileAction";
-import {DialogsPageActionType} from "./dialogsPage/dialogsAction";
-import {UsersPageActionType} from "./usersPage/usersAction";
 import usersReducer from "./usersPage/usersReducer";
+import {authReducer} from './authReducer/authReducer';
 
 const rootReducer = combineReducers({
     profileData: profileReducer,
     dialogsData: dialogReducer,
     usersData: usersReducer,
+    auth: authReducer,
 });
-
-type RootActionType =
-    ProfilePageActionType
-    | DialogsPageActionType
-    | UsersPageActionType
-
-export type RootStateType = ReturnType<typeof rootReducer>
 
 let rootStore = createStore(rootReducer);
 
-export default rootStore
+export type RootStateType = ReturnType<typeof rootReducer>
 
+export default rootStore

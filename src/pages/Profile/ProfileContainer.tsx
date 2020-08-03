@@ -14,7 +14,6 @@ class ProfileContainer extends React.Component<PropsProfileType> {
     componentDidMount(): void {
         let id
         (!this.props.match.params.id) ? id = 2 : id = this.props.match.params.id
-        debugger
         axios.default(`https://social-network.samuraijs.com/api/1.0/profile/${id}`)
             .then(response => this.props.setUserInfo(response.data))
     }
