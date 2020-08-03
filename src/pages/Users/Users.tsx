@@ -35,7 +35,7 @@ function Users(props: PropsUsersType) {
             </div>
             {props.users.map(user => <div key={user.id} className={style.user}>
                 <div className={style.userPhoto}>
-                    <NavLink to={paths.profile + '/' + user.id}>
+                    <NavLink to={paths.profile+ '/' + user.id}>
                         <img className={style.userPhotoPic} src={user.photos.small || userLogo} alt=""/>
                     </NavLink>
                     {user.followed
