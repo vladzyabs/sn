@@ -1,7 +1,6 @@
-import {ADD_LIKE_POST, ADD_POST, INPUT_NEW_POST, SET_USER_INFO} from "./profileAction";
+import {ADD_LIKE_POST, ADD_POST, INPUT_NEW_POST, ProfileStateType, SET_USER_INFO} from './profileType';
 import {v1} from "uuid";
 import {ProfilePageActionType} from "./profileAction";
-import {ProfileStateType} from "./profileType";
 
 let initialState: ProfileStateType = {
     posts: [

@@ -1,10 +1,5 @@
-import {ProfileInfoType} from './profileType'
+import {ADD_POST, INPUT_NEW_POST, SET_USER_INFO, ProfileInfoType, ADD_LIKE_POST} from './profileType'
 import {profileAPI} from '../../api/api';
-
-export const ADD_POST = 'ADD_POST'
-export const INPUT_NEW_POST = 'INPUT_NEW_POST'
-export const ADD_LIKE_POST = 'ADD_LIKE_POST'
-export const SET_USER_INFO = 'SET_USER_INFO'
 
 type ActionAddPostType = { type: typeof ADD_POST }
 export const actionAddPost = (): ActionAddPostType => {
@@ -21,6 +16,7 @@ export const actionInputNewPost = (newPost: string): ActionInputNewPostType => {
    }
 }
 
+
 type ActionAddLikePostType = { type: typeof ADD_LIKE_POST, idPost: string }
 export const actionAddLikePost = (idPost: string): ActionAddLikePostType => {
    return {
@@ -28,7 +24,6 @@ export const actionAddLikePost = (idPost: string): ActionAddLikePostType => {
       idPost,
    }
 }
-
 type ActionSetUserInfoType = { type: typeof SET_USER_INFO, preloader: ProfileInfoType }
 export const actionSetUserInfo = (info: ProfileInfoType): ActionSetUserInfoType => {
    return {
