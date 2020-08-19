@@ -18,6 +18,9 @@
   background: #fff;
   color: #111;
 }
+.messages .button:disabled {
+  background: #7dbbb9;
+}
 
 .messages .textarea {
   outline: none;

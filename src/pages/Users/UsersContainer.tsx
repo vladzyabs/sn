@@ -2,9 +2,9 @@ import React from "react";
 import {connect, ConnectedProps} from "react-redux";
 import {RootStateType} from "../../redux/rootStore";
 import * as action from "../../redux/usersPage/usersAction";
-import * as axios from "axios";
 import Users from "./Users";
 import Preloader from "../../components/common/Preloader/Preloader";
+import {usersAPI} from '../../api/api';
 
 type PropsUsersType = PropsFromRedux
     & {}
@@ -13,11 +13,10 @@ class UsersContainer extends React.Component<PropsUsersType> {
 
     componentDidMount(): void {
         this.props.actionSetLoading(true)
-        axios.default
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.actionSetUsers(response.data.items)
-                this.props.actionSetTotalUsersCount(response.data.totalCount)
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+            .then(data => {
+                this.props.actionSetUsers(data.items)
+                this.props.actionSetTotalUsersCount(data.totalCount)
                 this.props.actionSetLoading(false)
             })
     }
@@ -25,10 +24,9 @@ class UsersContainer extends React.Component<PropsUsersType> {
     onPageChanged = (page: number) => {
         this.props.actionSetCurrentPage(page)
         this.props.actionSetLoading(true)
-        axios.default
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.actionSetUsers(response.data.items)
+        usersAPI.getUsers(page, this.props.pageSize)
+            .then(data => {
+                this.props.actionSetUsers(data.items)
                 this.props.actionSetLoading(false)
             })
     }
@@ -42,7 +40,9 @@ class UsersContainer extends React.Component<PropsUsersType> {
                    currentPage={this.props.currentPage}
                    onFollow={this.props.actionFollowUsers}
                    onUnfollow={this.props.actionUnfollowUsers}
-                   onPageChanged={this.onPageChanged}/>
+                   onPageChanged={this.onPageChanged}
+                   isFollowingProgress={this.props.isFollowingProgress}
+                   onFollowChanged={this.props.actionToggleFollowingProgress}/>
         </>
     }
 }
@@ -53,7 +53,8 @@ const mstp = (state: RootStateType) => {
         pageSize: state.usersData.pageSize,
         totalCount: state.usersData.totalCount,
         currentPage: state.usersData.currentPage,
-        isLoading: state.usersData.isLoading
+        isLoading: state.usersData.isLoading,
+        isFollowingProgress: state.usersData.followingInProgress,
     }
 };
 

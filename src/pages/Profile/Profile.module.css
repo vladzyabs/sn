@@ -18,6 +18,9 @@
   background: #fff;
   color: #111;
 }
+.myPosts .button:disabled {
+  background: #7dbbb9;
+}
 
 .myPosts .textarea {
   outline: none;
