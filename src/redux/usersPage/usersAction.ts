@@ -79,7 +79,6 @@ export const thunkGetUser = (currentPage: number, pageSize: number) =>
 
 export const thunkUnfollow = (userID: number) =>
    (dispatch: any) => {
-      debugger
       dispatch(actionToggleFollowingProgress(true, userID))
       usersAPI.unfollowUser(userID)
          .then(data => {
@@ -92,7 +91,6 @@ export const thunkUnfollow = (userID: number) =>
 
 export const thunkFollow = (userID: number) =>
    (dispatch: any) => {
-      debugger
       dispatch(actionToggleFollowingProgress(true, userID))
       usersAPI.followUser(userID)
          .then(data => {

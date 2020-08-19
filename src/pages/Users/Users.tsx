@@ -18,7 +18,6 @@ type PropsUsersType = {
 }
 
 function Users(props: PropsUsersType) {
-   debugger
    let pagesCount = Math.ceil(props.totalCount / props.pageSize)
    let pages = []
    for (let i = 1; i <= pagesCount; i++) {
