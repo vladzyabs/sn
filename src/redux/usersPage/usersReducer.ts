@@ -1,7 +1,7 @@
 import {
    UsersPageActionType,
-} from './usersAction';
-import {UsersStateType} from './usersType';
+} from './usersAction'
+import {UsersStateType} from './usersType'
 
 let initialState: UsersStateType = {
    users: [],
@@ -49,6 +49,7 @@ const usersReducer = (state = initialState, action: UsersPageActionType): UsersS
       case 'SET_LOADING':
          return {...state, isLoading: action.payload}
       case 'TOGGLE_FOLLOWING_PROGRESS':
+         debugger
          return {
             ...state,
             followingInProgress: action.isFetching
@@ -58,6 +59,6 @@ const usersReducer = (state = initialState, action: UsersPageActionType): UsersS
       default:
          return state
    }
-};
+}
 
 export default usersReducer

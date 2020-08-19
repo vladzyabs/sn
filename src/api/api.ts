@@ -13,7 +13,7 @@ export const authAPI = {
       return instance
          .get('auth/me')
          .then(response => response.data)
-   }
+   },
 }
 
 export const profileAPI = {}
@@ -33,5 +33,5 @@ export const usersAPI = {
       return instance
          .delete(`follow/${userID}`)
          .then(response => response.data)
-   }
+   },
 }
