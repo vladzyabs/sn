@@ -1,7 +1,7 @@
 import {
    UsersPageActionType,
-} from './usersAction';
-import {UsersStateType} from './usersType';
+} from './usersAction'
+import {UsersStateType} from './usersType'
 
 let initialState: UsersStateType = {
    users: [],
@@ -58,6 +58,6 @@ const usersReducer = (state = initialState, action: UsersPageActionType): UsersS
       default:
          return state
    }
-};
+}
 
 export default usersReducer

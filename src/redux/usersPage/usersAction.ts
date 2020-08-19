@@ -1,23 +1,24 @@
 import {
-    FOLLOW_USER,
-    SET_CURRENT_PAGE,
-    SET_LOADING,
-    SET_TOTAL_USERS_COUNT,
-    SET_USERS, TOGGLE_FOLLOWING_PROGRESS,
-    UNFOLLOW_USER,
-    UserType,
-} from './usersType';
+   FOLLOW_USER,
+   SET_CURRENT_PAGE,
+   SET_LOADING,
+   SET_TOTAL_USERS_COUNT,
+   SET_USERS, TOGGLE_FOLLOWING_PROGRESS,
+   UNFOLLOW_USER,
+   UserType,
+} from './usersType'
+import {usersAPI} from '../../api/api'
 
-type ActionFollowUsersType = { type: typeof FOLLOW_USER, userID: string | number }
-export const actionFollowUsers = (userID: string | number): ActionFollowUsersType => {
+type ActionFollowUsersType = { type: typeof FOLLOW_USER, userID: number }
+export const actionFollowUsers = (userID: number): ActionFollowUsersType => {
    return {
       type: FOLLOW_USER,
       userID,
    }
 };
 
-type ActionUnfollowUsersType = { type: typeof UNFOLLOW_USER, userID: string | number }
-export const actionUnfollowUsers = (userID: string | number): ActionUnfollowUsersType => {
+type ActionUnfollowUsersType = { type: typeof UNFOLLOW_USER, userID: number }
+export const actionUnfollowUsers = (userID: number): ActionUnfollowUsersType => {
    return {
       type: UNFOLLOW_USER,
       userID,
@@ -64,6 +65,41 @@ export const actionToggleFollowingProgress = (isFetching: boolean, userID: numbe
       userID,
    }
 }
+
+export const thunkGetUser = (currentPage: number, pageSize: number) =>
+   (dispatch: any) => {
+      dispatch(actionSetLoading(true))
+      usersAPI.getUsers(currentPage, pageSize)
+         .then(data => {
+            dispatch(actionSetUsers(data.items))
+            dispatch(actionSetTotalUsersCount(data.totalCount))
+            dispatch(actionSetLoading(false))
+         })
+   }
+
+export const thunkUnfollow = (userID: number) =>
+   (dispatch: any) => {
+      dispatch(actionToggleFollowingProgress(true, userID))
+      usersAPI.unfollowUser(userID)
+         .then(data => {
+            if (data.resultCode === 0) {
+               dispatch(actionUnfollowUsers(userID))
+            }
+            dispatch(actionToggleFollowingProgress(false, userID))
+         })
+   }
+
+export const thunkFollow = (userID: number) =>
+   (dispatch: any) => {
+      dispatch(actionToggleFollowingProgress(true, userID))
+      usersAPI.followUser(userID)
+         .then(data => {
+            if (data.resultCode === 0) {
+               dispatch(actionFollowUsers(userID))
+            }
+            dispatch(actionToggleFollowingProgress(false, userID))
+         })
+   }
 
 export type UsersPageActionType =
    ActionFollowUsersType

@@ -8,7 +8,7 @@ export const TOGGLE_FOLLOWING_PROGRESS = 'TOGGLE_FOLLOWING_PROGRESS'
 
 export type UserType = {
     name: string
-    id: string | number
+    id: number
     uniqueUrlName: string | null
     photos: {
         small: string | null

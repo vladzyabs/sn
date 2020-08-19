@@ -27,6 +27,7 @@
     "react-scripts": "3.4.1",
     "react-svg": "^11.0.31",
     "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "typescript": "^3.7.5",
     "uuid": "^8.1.0"
   },

@@ -1,18 +1,17 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
+import React from 'react'
+import {NavLink} from 'react-router-dom'
 import userLogo from '../../assets/img/user-logo.png'
-import {UserType} from '../../redux/usersPage/usersType';
-import style from './Users.module.scss';
-import {paths} from '../../layout/paths';
-import {usersAPI} from '../../api/api';
+import {UserType} from '../../redux/usersPage/usersType'
+import style from './Users.module.scss'
+import {paths} from '../../layout/paths'
 
 type PropsUsersType = {
    users: UserType[]
    pageSize: number
    totalCount: number
    currentPage: number
-   onFollow: (id: string | number) => void
-   onUnfollow: (id: string | number) => void
+   onFollow: (id: number) => void
+   onUnfollow: (id: number) => void
    onPageChanged: (page: number) => void
    isFollowingProgress: number[]
    onFollowChanged: (value: boolean, id: number) => void
@@ -44,27 +43,11 @@ function Users(props: PropsUsersType) {
                {user.followed
                   ?
                   <button className={style.userBtn}
-                          onClick={() => {
-                             props.onFollowChanged(true, Number(user.id))
-                             usersAPI.unfollowUser(Number(user.id))
-                                .then(data => {
-                                   if (data.resultCode === 0) {
-                                      props.onUnfollow(user.id)
-                                   }
-                                   props.onFollowChanged(false, Number(user.id))
-                                })
-                          }} disabled={props.isFollowingProgress.some(id => id === user.id)}>unsubscribe</button>
+                          onClick={() => props.onUnfollow(Number(user.id))}
+                          disabled={props.isFollowingProgress.some(id => id === user.id)}>unsubscribe</button>
                   : <button className={style.userBtn}
-                            onClick={() => {
-                               props.onFollowChanged(true, Number(user.id))
-                               usersAPI.followUser(Number(user.id))
-                                  .then(data => {
-                                     if (data.resultCode === 0) {
-                                        props.onFollow(user.id)
-                                     }
-                                     props.onFollowChanged(false, Number(user.id))
-                                  })
-                            }} disabled={props.isFollowingProgress.some(id => id === user.id)}>subscribe</button>
+                            onClick={() => props.onFollow(Number(user.id))}
+                            disabled={props.isFollowingProgress.some(id => id === user.id)}>subscribe</button>
                }
             </div>
             <div className={style.userInf}>
