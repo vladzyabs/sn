@@ -16,7 +16,12 @@ export const authAPI = {
    },
 }
 
-export const profileAPI = {}
+export const profileAPI = {
+   getProfileInfo(userID: number) {
+      return instance
+         .get(`profile/${userID}`)
+   },
+}
 
 export const usersAPI = {
    getUsers(currentPage: number = 1, pageSize: number = 10) {

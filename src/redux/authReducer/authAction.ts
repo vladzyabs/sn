@@ -1,4 +1,5 @@
-import {AuthType, SET_USER_DATA} from './authTypes';
+import {AuthType, SET_USER_DATA} from './authTypes'
+import {authAPI} from '../../api/api';
 
 type SetAuthDataActionType = {
    type: typeof SET_USER_DATA
@@ -14,6 +15,16 @@ export const setAuthDataAC = (payload: AuthType): SetAuthDataActionType => {
       email: payload.email,
    }
 }
+
+export const thunkGetAuthData = () =>
+   (dispatch: any) => {
+      authAPI.getMe()
+         .then(data => {
+            if (data.resultCode === 0) {
+               dispatch(setAuthDataAC(data.data))
+            }
+         })
+   }
 
 export type ActionType
    = SetAuthDataActionType
