@@ -21,6 +21,10 @@
     color: $color-black;
     @extend %box-shadow;
   }
+
+  &:disabled {
+    background: #7dbbb9;
+  }
 }
 
 %textarea {

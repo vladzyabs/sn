@@ -18,6 +18,9 @@
   background: #fff;
   color: #111;
 }
+.users .userBtn:disabled {
+  background: #7dbbb9;
+}
 
 ::-webkit-scrollbar-button {
   background-repeat: no-repeat;
