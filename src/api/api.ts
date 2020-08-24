@@ -1,4 +1,5 @@
 import * as axios from 'axios'
+import {ResponseType, AuthMeDataType, ProfileDataType, UsersDataType} from './apiType'
 
 const instance = axios.default.create({
    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -11,7 +12,7 @@ const instance = axios.default.create({
 export const authAPI = {
    getMe() {
       return instance
-         .get('auth/me')
+         .get<ResponseType<AuthMeDataType>>('auth/me')
          .then(response => response.data)
    },
 }
@@ -19,24 +20,24 @@ export const authAPI = {
 export const profileAPI = {
    getProfileInfo(userID: number) {
       return instance
-         .get(`profile/${userID}`)
+         .get<ProfileDataType>(`profile/${userID}`)
    },
 }
 
 export const usersAPI = {
    getUsers(currentPage: number = 1, pageSize: number = 10) {
       return instance
-         .get(`users?page=${currentPage}&count=${pageSize}`)
+         .get<UsersDataType>(`users?page=${currentPage}&count=${pageSize}`)
          .then(response => response.data)
    },
    followUser(userID: number) {
       return instance
-         .post(`follow/${userID}`)
+         .post<ResponseType>(`follow/${userID}`)
          .then(response => response.data)
    },
    unfollowUser(userID: number) {
       return instance
-         .delete(`follow/${userID}`)
+         .delete<ResponseType>(`follow/${userID}`)
          .then(response => response.data)
    },
 }
