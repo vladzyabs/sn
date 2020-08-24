@@ -1,5 +1,6 @@
-import {AuthType, SET_USER_DATA} from './authTypes'
-import {authAPI} from '../../api/api';
+import {SET_USER_DATA} from './authTypes'
+import {authAPI} from '../../api/api'
+import {AuthMeDataType} from '../../api/apiType'
 
 type SetAuthDataActionType = {
    type: typeof SET_USER_DATA
@@ -7,7 +8,7 @@ type SetAuthDataActionType = {
    login: string | null
    email: string | null
 }
-export const setAuthDataAC = (payload: AuthType): SetAuthDataActionType => {
+export const setAuthDataAC = (payload: AuthMeDataType): SetAuthDataActionType => {
    return {
       type: SET_USER_DATA,
       id: payload.id,
