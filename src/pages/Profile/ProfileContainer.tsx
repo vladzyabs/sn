@@ -4,6 +4,8 @@ import {RootStateType} from '../../redux/rootStore'
 import * as actions from '../../redux/profilePage/profileAction'
 import {connect, ConnectedProps} from 'react-redux'
 import Profile from './Profile'
+import withAuthRedirect from '../../components/hoc/AuthRedirect'
+import {compose} from 'redux'
 
 type PropsProfileType = PropsFromRedux & RouteComponentProps<{ id: string }>
    & {}
@@ -40,4 +42,8 @@ const connector = connect(mstp, mdtp)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-export default withRouter(connector(ProfileContainer))
+export default compose<React.ComponentType>(
+   withRouter,
+   connector,
+   withAuthRedirect,
+)(ProfileContainer)

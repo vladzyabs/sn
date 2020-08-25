@@ -2,15 +2,10 @@ import React from 'react'
 import style from './Header.module.scss'
 import {RootStateType} from '../../redux/rootStore'
 import {connect, ConnectedProps} from 'react-redux'
-import {thunkGetAuthData} from '../../redux/authReducer/authAction'
 import {NavLink} from 'react-router-dom'
 import {paths} from '../../layout/paths'
 
 class Header extends React.Component<PropsFromRedux & {}> {
-   componentDidMount(): void {
-      this.props.thunkGetAuthData()
-   }
-
    render() {
       return (
          <header className={style.header}>
@@ -34,7 +29,7 @@ const mstp = (state: RootStateType) => {
    }
 }
 
-const connector = connect(mstp, {thunkGetAuthData})
+const connector = connect(mstp)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 

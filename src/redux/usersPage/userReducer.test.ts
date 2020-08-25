@@ -6,9 +6,9 @@ let initialState: UsersStateType
 beforeEach(() => {
    initialState = {
       users: [
-         {id: 0, name: 'A', uniqueUrlName: null, photos: {small: null, large: null}, status: 'a', followed: true},
-         {id: 1, name: 'B', uniqueUrlName: null, photos: {small: null, large: null}, status: 'b', followed: false},
-         {id: 2, name: 'C', uniqueUrlName: null, photos: {small: null, large: null}, status: 'c', followed: true},
+         {id: 0, name: 'A', photos: {small: null, large: null}, status: 'a', followed: true},
+         {id: 1, name: 'B', photos: {small: null, large: null}, status: 'b', followed: false},
+         {id: 2, name: 'C', photos: {small: null, large: null}, status: 'c', followed: true},
       ],
       totalCount: 1000,
       pageSize: 10,
