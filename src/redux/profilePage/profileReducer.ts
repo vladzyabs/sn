@@ -1,4 +1,4 @@
-import {ADD_LIKE_POST, ADD_POST, INPUT_NEW_POST, ProfileStateType, SET_USER_INFO} from './profileType';
+import {ADD_LIKE_POST, ADD_POST, INPUT_NEW_POST, ProfileStateType, SET_STATUS, SET_USER_INFO} from './profileType';
 import {v1} from "uuid";
 import {ProfilePageActionType} from "./profileAction";
 
@@ -12,6 +12,7 @@ let initialState: ProfileStateType = {
         {id: v1(), postValue: 'post 6', countLike: 17},
         {id: v1(), postValue: 'post 7', countLike: 20},
     ],
+    status: '',
     newPosts: '',
     profileInfo: null,
 };
@@ -47,6 +48,11 @@ const profileReducer = (state = initialState, action: ProfilePageActionType): Pr
                     return post
                 })
             };
+        case SET_STATUS:
+            return {
+                ...state,
+                status: action.status
+            }
         default:
             return state
     }

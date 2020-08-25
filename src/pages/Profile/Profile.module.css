@@ -111,6 +111,16 @@
 .profile .userDesc p {
   margin-bottom: 5px;
 }
+.profile .status {
+  margin-bottom: 10px;
+}
+.profile .statusOffEditMode + .statusIcon {
+  display: none;
+  margin-left: 5px;
+}
+.profile .statusOffEditMode:hover + .statusIcon {
+  display: inline-block;
+}
 
 .myPosts .addPosts {
   background: #fff;
