@@ -27,5 +27,5 @@ export const thunkGetAuthData = () =>
          })
    }
 
-export type ActionType
+export type AuthActionType
    = SetAuthDataActionType

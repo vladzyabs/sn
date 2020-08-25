@@ -24,6 +24,7 @@ function Main(props: PropsMainType) {
                 <Route path={paths.news}><News/></Route>
                 <Route path={paths.music}><Music/></Route>
                 <Route path={paths.settings}><Settings/></Route>
+                <Route path={paths.login}><Login/></Route>
                 <Route component={NotFound}/>
             </Switch>
         </main>
