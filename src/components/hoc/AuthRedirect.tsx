@@ -13,9 +13,9 @@ const withAuthRedirect = (Component: React.ComponentType<{ isAuth: boolean; disp
    }
 
    const AuthRedirect = (props: PropsFromRedux) => {
-      // if (!props.isAuth) {
-      //    return <Redirect to={paths.login}/>
-      // }
+      if (!props.isAuth) {
+         return <Redirect to={paths.login}/>
+      }
       return <Component {...props}/>
    }
 
