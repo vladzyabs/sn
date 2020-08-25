@@ -8,6 +8,8 @@ import Preloader from "../../components/common/Preloader/Preloader";
 type PropsProfileType = {
     posts: any
     newPosts: any
+    status: string
+    updateStatus: (status: string) => void
     profileInfo: ProfileInfoType
     addPost: () => void
     inputNewPost: (value: string) => void
@@ -21,7 +23,9 @@ function Profile(props: PropsProfileType) {
     return (
         <div className={style.profile}>
 
-            <UserInfo userInfo={props.profileInfo}/>
+            <UserInfo userInfo={props.profileInfo}
+                      status={props.status}
+                      updateStatus={props.updateStatus}/>
 
             <MyPosts posts={props.posts}
                      newPosts={props.newPosts}

@@ -22,6 +22,14 @@ export const profileAPI = {
       return instance
          .get<ProfileDataType>(`profile/${userID}`)
    },
+   getStatus(userID: number) {
+      return instance
+         .get<string>(`/profile/status/${userID}`)
+   },
+   updateStatus(status: string) {
+      return instance
+         .put<ResponseType>(`/profile/status`, {status: status})
+   },
 }
 
 export const usersAPI = {
