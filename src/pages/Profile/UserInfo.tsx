@@ -2,6 +2,7 @@ import React from "react";
 import style from "./Profile.module.scss";
 import defPhoto from "../../assets/img/user-logo.png"
 import {ProfileInfoType} from "../../redux/profilePage/profileType";
+import ProfileStatus from './ProfileStatus';
 
 type PropsUserInfoType = {
     userInfo: ProfileInfoType
@@ -20,6 +21,7 @@ function UserInfo(props: PropsUserInfoType) {
                 <div className={style.userName}>
                     <h1>{props.userInfo.fullName}</h1>
                     <p>{props.userInfo.aboutMe}</p>
+                   <ProfileStatus status={'sdfsdg'}/>
                 </div>
                 <div className={style.userDesc}>
                     {props.userInfo.contacts.facebook &&
