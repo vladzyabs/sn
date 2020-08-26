@@ -1,4 +1,4 @@
-import {ADD_MESSAGE, INPUT_NEW_MESSAGE} from './dialogsAction'
+import {ADD_MESSAGE} from './dialogsAction'
 import {v1} from 'uuid'
 import {DialogsPageActionType} from './dialogsAction'
 
@@ -11,7 +11,6 @@ let initialState = {
       {id: v1(), name: 'Sasha'},
       {id: v1(), name: 'Dasha'},
    ],
-   newMessage: '',
    messages: [
       {id: v1(), message: 'Hi', fromMe: false},
       {id: v1(), message: 'how are you?', fromMe: false},
@@ -27,18 +26,13 @@ export type InitialStateType = typeof initialState
 const dialogReducer = (state: InitialStateType = initialState, action: DialogsPageActionType): InitialStateType => {
    switch (action.type) {
       case ADD_MESSAGE:
-         if (state.newMessage.trim()) {
+         if (action.value) {
             return {
                ...state,
-               newMessage: '',
-               messages: [...state.messages, {id: v1(), message: state.newMessage.trim(), fromMe: true}],
-            };
-         } else return {...state, newMessage: ''}
-      case INPUT_NEW_MESSAGE:
-         return {
-            ...state,
-            newMessage: action.newMessage,
-         };
+               messages: [...state.messages, {id: v1(), message: action.value.trim(), fromMe: true}],
+            }
+         }
+         return {...state}
       default:
          return state
    }

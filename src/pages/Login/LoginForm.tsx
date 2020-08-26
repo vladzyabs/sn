@@ -23,5 +23,5 @@ function LoginForm(props: LoginFormPropsType & InjectedFormProps) {
 }
 
 export default reduxForm<{}, LoginFormPropsType>({
-   form: 'myform',
+   form: 'login',
 })(LoginForm)
