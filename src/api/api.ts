@@ -19,7 +19,7 @@ export const authAPI = {
       return instance
          .post<ResponseType<{ userId: number }>>(`auth/login`, {email, password, rememberMe})
    },
-   logout(email: string, password: string, rememberMe: boolean = false) {
+   logout() {
       return instance
          .delete<ResponseType>(`auth/login`)
    },
