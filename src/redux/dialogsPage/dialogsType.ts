@@ -11,5 +11,4 @@ export type MessagesType = {
 export type DialogsType = {
     chats: ChatsType[]
     messages: MessagesType[]
-    newMessage: string
 }

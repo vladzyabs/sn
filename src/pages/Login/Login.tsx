@@ -1,12 +1,20 @@
-import React from "react";
-// import style from "./Dialogs.module.scss";
+import React from 'react'
+import LoginForm from './LoginForm'
 
-function Login(props: any) {
-    return (
-        <div>
-            Login
-        </div>
-    )
+type LoginPropsType = {}
+
+function Login(props: LoginPropsType) {
+
+   const onSubmit = (formData: any) => {
+      console.log(formData)
+   }
+
+   return (
+      <div>
+         <h1>Login</h1>
+         <LoginForm onSubmit={onSubmit}/>
+      </div>
+   )
 }
 
 export default Login

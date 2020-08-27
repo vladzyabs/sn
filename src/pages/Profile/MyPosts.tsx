@@ -1,52 +1,58 @@
-import React, {ChangeEvent, KeyboardEvent} from "react";
-import style from "./Profile.module.scss";
-import Icon, {iconsName, iconsPrefix} from "../../components/Icon/Icon";
-import Post from "./Post";
-import {PostsType} from "../../redux/profilePage/profileType";
+import React from 'react'
+import style from './Profile.module.scss'
+import Icon, {iconsName, iconsPrefix} from '../../components/Icon/Icon'
+import Post from './Post'
+import {PostsType} from '../../redux/profilePage/profileType'
+import {reduxForm, InjectedFormProps, Field} from 'redux-form'
 
 type PropsMyPostsType = {
-    posts: PostsType[]
-    newPosts: string
-    addPost: () => void
-    inputNewPost: (value: string) => void
-    addLike: (id: string) => void
+   posts: PostsType[]
+   addPost: (value: string) => void
+   addLike: (id: string) => void
 }
 
 function MyPost(props: PropsMyPostsType) {
-    const textareaOnChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.inputNewPost(e.currentTarget.value)
-    };
-    const textareaOnKeyPress = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.ctrlKey && e.charCode === 13) {
-            buttonOnClick();
-        }
-    };
-    const buttonOnClick = () => {
-        props.addPost()
-    };
-    return (
-        <div className={style.myPosts}>
 
-            <div className={style.addPosts}>
-                <span>New post:</span>
-                <textarea className={style.textarea}
-                          onChange={textareaOnChange}
-                          value={props.newPosts}
-                          onKeyPress={textareaOnKeyPress}/>
-                <button className={style.button} onClick={buttonOnClick}>
-                    Send<Icon prefix={iconsPrefix.fas} iconName={iconsName.paperPlane} size={'sm'}/>
-                </button>
-            </div>
+   const addPost = (formData: any) => {
+       props.addPost(formData.newPostBody)
+   }
 
-            <div className={style.postsItems}>
+   return (
+      <div className={style.myPosts}>
 
-                {
-                    props.posts.map(post => <Post key={post.id} post={post} addLike={props.addLike}/>)
-                }
+         <div className={style.addPosts}>
+            <span>New post:</span>
+            <AddPostReduxForm onSubmit={addPost}/>
+         </div>
 
-            </div>
-        </div>
-    )
+         <div className={style.postsItems}>
+
+            {
+               props.posts.map(post => <Post key={post.id} post={post} addLike={props.addLike}/>)
+            }
+
+         </div>
+      </div>
+   )
 }
+
+// form add post -----------------------------------------------------------------------------------------------------
+
+function AddPost(props: {} & InjectedFormProps) {
+   return (
+      <form onSubmit={props.handleSubmit}>
+         <Field className={style.textarea} name={'newPostBody'} component={'textarea'} placeholder={'Enter your post'}/>
+         <button className={style.button}>
+            Send<Icon prefix={iconsPrefix.fas} iconName={iconsName.paperPlane} size={'sm'}/>
+         </button>
+      </form>
+   )
+}
+
+const AddPostReduxForm = reduxForm<{}>({
+   form: 'profileAddPost',
+})(AddPost)
+
+// -------------------------------------------------------------------------------------------------------------------
 
 export default MyPost
