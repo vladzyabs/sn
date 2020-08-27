@@ -56,7 +56,6 @@ const AddMessageReduxForm = reduxForm<{}>({
    form: 'dialogsAddMessage',
 })(FormMessage)
 
-
 // --------------------------------------------------------------------------------------------------------------------
 
 const mstp = (state: RootStateType) => {

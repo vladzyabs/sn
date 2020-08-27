@@ -1,18 +1,11 @@
-import {ADD_LIKE_POST, ADD_POST, INPUT_NEW_POST, ProfileInfoType, SET_STATUS, SET_USER_INFO} from './profileType'
+import {ADD_LIKE_POST, ADD_POST, ProfileInfoType, SET_STATUS, SET_USER_INFO} from './profileType'
 import {profileAPI} from '../../api/api'
 
-type ActionAddPostType = { type: typeof ADD_POST }
-export const actionAddPost = (): ActionAddPostType => {
+type ActionAddPostType = { type: typeof ADD_POST, value: string }
+export const actionAddPost = (value: string): ActionAddPostType => {
    return {
       type: ADD_POST,
-   }
-}
-
-type ActionInputNewPostType = { type: typeof INPUT_NEW_POST, newPost: string }
-export const actionInputNewPost = (newPost: string): ActionInputNewPostType => {
-   return {
-      type: INPUT_NEW_POST,
-      newPost,
+      value,
    }
 }
 
@@ -64,7 +57,6 @@ export const thunkUpdateStatus = (status: string) =>
 
 export type ProfilePageActionType =
    ActionAddPostType
-   | ActionInputNewPostType
    | ActionAddLikePostType
    | ActionSetUserInfoType
    | ActionSetStatusType

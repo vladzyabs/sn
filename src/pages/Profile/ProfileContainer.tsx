@@ -27,7 +27,6 @@ class ProfileContainer extends React.Component<PropsProfileType> {
 const mstp = (state: RootStateType) => {
    return {
       posts: state.profileData.posts,
-      newPosts: state.profileData.newPosts,
       profileInfo: state.profileData.profileInfo,
       status: state.profileData.status,
    }
@@ -37,8 +36,7 @@ const mdtp = {
    getUserInfo: (userID: number) => (actions.thunkGetUserInfo(userID)),
    getStatus: (userID: number) => (actions.thunkGetStatus(userID)),
    updateStatus: (status: string) => (actions.thunkUpdateStatus(status)),
-   addPost: () => (actions.actionAddPost()),
-   inputNewPost: (value: string) => (actions.actionInputNewPost(value)),
+   addPost: (value: string) => (actions.actionAddPost(value)),
    addLike: (id: string) => (actions.actionAddLikePost(id)),
 }
 
