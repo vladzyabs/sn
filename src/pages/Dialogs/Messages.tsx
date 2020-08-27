@@ -7,6 +7,8 @@ import {RootStateType} from '../../redux/rootStore'
 import {actionAddMessage} from '../../redux/dialogsPage/dialogsAction'
 import {MessagesType} from '../../redux/dialogsPage/dialogsType'
 import {reduxForm, Field, InjectedFormProps} from 'redux-form'
+import Textarea from '../../components/common/Textarea/Textarea'
+import {maxLength, required} from '../../utils/validation/validators';
 
 type PropsMessagesType = {
    messages: MessagesType[]
@@ -39,12 +41,15 @@ function Messages(props: PropsMessagesType) {
 }
 
 //form message -------------------------------------------------------------------------------------------------------
-
+const maxLengthField300 = maxLength(300)
 function FormMessage(props: {} & InjectedFormProps) {
    return (
       <form onSubmit={props.handleSubmit}>
-         <Field className={style.textarea} name={'newMessageBody'} component={'textarea'}
-                placeholder={'Enter your message'}/>
+         <Field className={style.textarea}
+                name={'newMessageBody'}
+                component={Textarea}
+                placeholder={'Enter your message'}
+                validate={[required, maxLengthField300]}/>
          <button className={style.button}>
             Send<Icon prefix={iconsPrefix.fas} iconName={iconsName.paperPlane} size={'sm'}/>
          </button>
