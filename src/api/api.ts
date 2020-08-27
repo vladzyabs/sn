@@ -15,6 +15,14 @@ export const authAPI = {
          .get<ResponseType<AuthMeDataType>>('auth/me')
          .then(response => response.data)
    },
+   login(email: string, password: string, rememberMe: boolean = false) {
+      return instance
+         .post<ResponseType<{ userId: number }>>(`auth/login`, {email, password, rememberMe})
+   },
+   logout(email: string, password: string, rememberMe: boolean = false) {
+      return instance
+         .delete<ResponseType>(`auth/login`)
+   },
 }
 
 export const profileAPI = {
