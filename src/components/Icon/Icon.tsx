@@ -22,6 +22,8 @@ export const iconsName = {
    frown: 'frown',
    heart: 'heart',
    pen: 'pen',
+   signInAlt: 'sign-in-alt',
+   signOutAlt: 'sign-out-alt',
 };
 
 type IconProps = {

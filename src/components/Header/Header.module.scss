@@ -1,8 +1,37 @@
 @import "../../style/style.scss", "../../style/variables";
 
 .header {
-    @extend %box-shadow;
-    background: $color-greenish-blue;
-    grid-area: header;
-    border-radius: 0 0 3px 3px;
+  @extend %box-shadow;
+  background: $color-greenish-blue;
+  grid-area: header;
+  border-radius: 0 0 3px 3px;
+  padding: 10px 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    font-size: 30px;
+    color: $color-greenish-blue-dark;
+    text-shadow: 0px 0px 4px $color-forest-wolf;
+  }
+
+  .auth {
+    color: $color-white;
+  }
+
+  .headerLink {
+    cursor: pointer;
+    color: $color-white;
+    transition: .3s;
+
+    &:hover {
+      color: $color-forest-wolf;
+    }
+
+    svg {
+      margin-left: 5px;
+    }
+  }
 }

@@ -1,6 +1,8 @@
 import {SET_USER_DATA} from './authTypes'
 import {authAPI} from '../../api/api'
 import {AuthMeDataType} from '../../api/apiType'
+import {Dispatch} from 'redux'
+
 
 type SetAuthDataActionType = {
    type: typeof SET_USER_DATA
@@ -20,7 +22,7 @@ export const setAuthDataAC = (payload: AuthMeDataType, isAuth: boolean): SetAuth
 }
 
 export const thunkGetAuthData = () =>
-   (dispatch: any) => {
+   (dispatch: Dispatch) => {
       authAPI.getMe()
          .then(data => {
             if (data.resultCode === 0) {
@@ -39,8 +41,8 @@ export const thunkLogin = (email: string, password: string, rememberMe: boolean 
          })
    }
 
-export const thunkLogout = (email: string, password: string, rememberMe: boolean = false) =>
-   (dispatch: any) => {
+export const thunkLogout = () =>
+   (dispatch: Dispatch) => {
       authAPI.logout()
          .then(response => {
             if (response.data.resultCode === 0) {

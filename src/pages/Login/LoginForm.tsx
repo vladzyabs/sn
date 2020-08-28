@@ -14,7 +14,7 @@ function LoginForm(props: {} & InjectedFormProps) {
             <Field type="text" name={'login'} component={Input} placeholder={'login'} validate={[required, maxLengthField100]}/>
          </div>
          <div>
-            <Field type="text" name={'password'} component={Input} placeholder={'password'} validate={[required, maxLengthField100]}/>
+            <Field type="password" name={'password'} component={Input} placeholder={'password'} validate={[required, maxLengthField100]}/>
          </div>
          <div>
             <Field type="checkbox" name={'rememberMe'} component={'input'}/>Remember me
