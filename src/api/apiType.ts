@@ -5,9 +5,9 @@ export type ResponseType<T = {}> = {
 }
 
 export type AuthMeDataType = {
-   id: number
-   email: string
-   login: string
+   id: number | null
+   email: string | null
+   login: string | null
 }
 
 export type ProfileDataType = {
