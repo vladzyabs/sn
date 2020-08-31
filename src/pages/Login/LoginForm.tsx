@@ -7,7 +7,7 @@ type LoginFormPropsType = {}
 
 const maxLengthField100 = maxLength(100)
 
-function LoginForm(props: {} & InjectedFormProps) {
+function LoginForm(props: LoginFormPropsType & InjectedFormProps) {
    return (
       <form onSubmit={props.handleSubmit}>
          <div>
@@ -19,6 +19,7 @@ function LoginForm(props: {} & InjectedFormProps) {
          <div>
             <Field type="checkbox" name={'rememberMe'} component={'input'}/>Remember me
          </div>
+         {props.error && <div style={{color: 'red', margin: '5px'}}>{props.error}</div>}
          <div>
             <button>login</button>
          </div>

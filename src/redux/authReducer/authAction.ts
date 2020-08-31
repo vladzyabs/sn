@@ -2,6 +2,7 @@ import {SET_USER_DATA} from './authTypes'
 import {authAPI} from '../../api/api'
 import {AuthMeDataType} from '../../api/apiType'
 import {Dispatch} from 'redux'
+import {stopSubmit} from 'redux-form'
 
 
 type SetAuthDataActionType = {
@@ -37,6 +38,9 @@ export const thunkLogin = (email: string, password: string, rememberMe: boolean 
          .then(response => {
             if (response.data.resultCode === 0) {
                dispatch(thunkGetAuthData())
+            } else {
+               let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+               dispatch(stopSubmit('loginForm', {_error: message}))
             }
          })
    }
