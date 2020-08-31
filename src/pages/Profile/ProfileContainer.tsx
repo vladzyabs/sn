@@ -14,7 +14,7 @@ class ProfileContainer extends React.Component<PropsProfileType> {
 
    componentDidMount(): void {
       let id
-      (!this.props.match.params.id) ? id = 6250 : id = this.props.match.params.id
+      (!this.props.match.params.id) ? id = this.props.currentUserID : id = this.props.match.params.id
       this.props.getUserInfo(Number(id))
       this.props.getStatus(Number(id))
    }
@@ -29,6 +29,7 @@ const mstp = (state: RootStateType) => {
       posts: state.profileData.posts,
       profileInfo: state.profileData.profileInfo,
       status: state.profileData.status,
+      currentUserID: state.auth.id,
    }
 }
 
