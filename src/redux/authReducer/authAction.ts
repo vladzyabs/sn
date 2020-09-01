@@ -24,7 +24,7 @@ export const setAuthDataAC = (payload: AuthMeDataType, isAuth: boolean): SetAuth
 
 export const thunkGetAuthData = () =>
    (dispatch: Dispatch) => {
-      authAPI.getMe()
+      return authAPI.getMe()
          .then(data => {
             if (data.resultCode === 0) {
                dispatch(setAuthDataAC(data.data, true))

@@ -9,8 +9,11 @@ import {AuthActionType} from './authReducer/authAction'
 import {DialogsPageActionType} from './dialogsPage/dialogsAction'
 import {ProfilePageActionType} from './profilePage/profileAction'
 import {UsersPageActionType} from './usersPage/usersAction'
+import appReducer from './appReducer/appReducer'
+import {AppActionType} from './appReducer/appAction'
 
 const rootReducer = combineReducers({
+   appData: appReducer,
    profileData: profileReducer,
    dialogsData: dialogReducer,
    usersData: usersReducer,
@@ -27,5 +30,6 @@ export type RootActionType =
    | DialogsPageActionType
    | ProfilePageActionType
    | UsersPageActionType
+   | AppActionType
 
 export default rootStore
