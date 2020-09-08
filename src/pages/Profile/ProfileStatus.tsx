@@ -62,7 +62,8 @@ class ProfileStatus extends React.Component<ProfileStatusPropsType> {
                          onBlur={this.offEditMode} autoFocus/>
                   :
                   <div>
-                     <span onDoubleClick={this.onEditMode} className={styles.statusOffEditMode}>{this.props.status || 'Enter status'}</span>
+                     <span onDoubleClick={this.onEditMode}
+                           className={styles.statusOffEditMode}>{this.props.status || 'Enter status'}</span>
                      <span className={styles.statusIcon}>
                         <Icon size={'xs'} prefix={iconsPrefix.fas} iconName={iconsName.pen}/>
                      </span>

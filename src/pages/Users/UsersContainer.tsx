@@ -4,6 +4,7 @@ import {RootStateType} from '../../redux/rootStore'
 import * as action from '../../redux/usersPage/usersAction'
 import Users from './Users'
 import Preloader from '../../components/common/Preloader/Preloader'
+import * as userSelectors from '../../redux/usersPage/userSelectors'
 
 type PropsUsersType = PropsFromRedux
    & {}
@@ -20,6 +21,7 @@ class UsersContainer extends React.Component<PropsUsersType> {
    }
 
    render() {
+      debugger
       return <>
          {this.props.isLoading && <Preloader/>}
          <Users users={this.props.users}
@@ -37,17 +39,19 @@ class UsersContainer extends React.Component<PropsUsersType> {
 
 const mstp = (state: RootStateType) => {
    return {
-      users: state.usersData.users,
-      pageSize: state.usersData.pageSize,
-      totalCount: state.usersData.totalCount,
-      currentPage: state.usersData.currentPage,
-      isLoading: state.usersData.isLoading,
-      isFollowingProgress: state.usersData.followingInProgress,
+      users: userSelectors.getUsers(state),
+      pageSize: userSelectors.getPageSize(state),
+      totalCount: userSelectors.getTotalCount(state),
+      currentPage: userSelectors.getCurrentPage(state),
+      isLoading: userSelectors.getIsLoading(state),
+      isFollowingProgress: userSelectors.getIsFollowingProgress(state),
    }
-};
+}
 
-let connector = connect(mstp, action);
+let connector = connect(mstp, action)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 export default connector(UsersContainer)
+
+
