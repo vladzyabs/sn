@@ -1,4 +1,4 @@
-import React, {ChangeEvent, KeyboardEvent} from 'react'
+import React, {ChangeEvent, KeyboardEvent, useEffect, useState} from 'react'
 import Icon, {iconsName, iconsPrefix} from '../../components/Icon/Icon'
 import styles from './Profile.module.scss'
 
@@ -7,70 +7,52 @@ type ProfileStatusPropsType = {
    updateStatus: (status: string) => void
 }
 
-class ProfileStatus extends React.Component<ProfileStatusPropsType> {
-   state = {
-      editMode: false,
-      status: this.props.status,
+const ProfileStatus = (props: ProfileStatusPropsType) => {
+
+   const [editMode, setEditMode] = useState<boolean>(false)
+   const [status, setStatus] = useState<string>(props.status)
+
+   useEffect(() => {
+      setStatus(props.status)
+   }, [props.status])
+
+   const onEditMode = () => {
+      setEditMode(true)
    }
 
-   componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>, prevState: Readonly<{}>, snapshot?: any): void {
-      if (prevProps.status !== this.props.status) {
-         this.setState({
-            status: this.props.status,
-         })
-      }
+   const offEditMode = () => {
+      setEditMode(false)
+      props.updateStatus(status)
    }
 
-   onEditMode = () => {
-      this.setState(
-         {
-            editMode: true,
-         },
-      )
+   const changeStatus = (e: ChangeEvent<HTMLInputElement>) => {
+      setStatus(e.currentTarget.value)
    }
 
-   offEditMode = () => {
-      this.setState(
-         {
-            editMode: false,
-         },
-      )
-      this.props.updateStatus(this.state.status)
-   }
-
-   changeStatus = (e: ChangeEvent<HTMLInputElement>) => {
-      this.setState(
-         {
-            status: e.currentTarget.value,
-         },
-      )
-   }
-
-   pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+   const pressEnter = (e: KeyboardEvent<HTMLInputElement>) => {
       if (e.charCode === 13) {
-         this.offEditMode()
+         offEditMode()
       }
    }
 
-   render() {
-      return (
-         <div className={styles.status}>
-            {
-               this.state.editMode
-                  ?
-                  <input type="text" value={this.state.status} onKeyPress={this.pressEnter} onChange={this.changeStatus}
-                         onBlur={this.offEditMode} autoFocus/>
-                  :
-                  <div>
-                     <span onDoubleClick={this.onEditMode} className={styles.statusOffEditMode}>{this.props.status || 'Enter status'}</span>
-                     <span className={styles.statusIcon}>
+   return (
+      <div className={styles.status}>
+         {
+            editMode
+               ?
+               <input type="text" value={status} onKeyPress={pressEnter} onChange={changeStatus}
+                      onBlur={offEditMode} autoFocus/>
+               :
+               <div>
+                     <span onDoubleClick={onEditMode}
+                           className={styles.statusOffEditMode}>{status || 'Enter status'}</span>
+                  <span className={styles.statusIcon}>
                         <Icon size={'xs'} prefix={iconsPrefix.fas} iconName={iconsName.pen}/>
                      </span>
-                  </div>
-            }
-         </div>
-      )
-   }
+               </div>
+         }
+      </div>
+   )
 }
 
 export default ProfileStatus

@@ -5,6 +5,7 @@ import {RootStateType} from '../../redux/rootStore'
 import {thunkLogin} from '../../redux/authReducer/authAction'
 import {connect, ConnectedProps} from 'react-redux'
 import {paths} from '../../layout/paths'
+import {getIsAuth} from '../../redux/authReducer/authSelectors'
 
 type LoginPropsType = {}
 
@@ -27,7 +28,7 @@ function Login(props: LoginPropsType & PropsFromRedux) {
 }
 
 const mstp = (state: RootStateType) => ({
-   isAuth: state.auth.isAuth,
+   isAuth: getIsAuth(state),
 })
 
 const mdtp = {

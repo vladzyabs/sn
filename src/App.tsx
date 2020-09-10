@@ -10,6 +10,8 @@ import {connect, ConnectedProps} from 'react-redux'
 import './style/App.scss'
 import Preloader from './components/common/Preloader/Preloader'
 import {initialize} from './redux/appReducer/appAction'
+import {getInitialized} from './redux/appReducer/appSelectors';
+import {getIsAuth} from './redux/authReducer/authSelectors';
 
 type PropsAppType = PropsFromRedux & {}
 
@@ -37,8 +39,8 @@ class App extends React.Component<PropsAppType> {
 
 const mstp = (state: RootStateType) => {
    return {
-      isAuth: state.auth.isAuth,
-      initialized: state.appData.initialized
+      isAuth: getIsAuth(state),
+      initialized: getInitialized(state),
    }
 }
 

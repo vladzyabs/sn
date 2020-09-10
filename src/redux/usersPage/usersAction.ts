@@ -66,10 +66,11 @@ export const actionToggleFollowingProgress = (isFetching: boolean, userID: numbe
    }
 }
 
-export const thunkGetUser = (currentPage: number, pageSize: number) =>
+export const thunkGetUser = (page: number, pageSize: number) =>
    (dispatch: any) => {
       dispatch(actionSetLoading(true))
-      usersAPI.getUsers(currentPage, pageSize)
+      dispatch(actionSetCurrentPage(page))
+      usersAPI.getUsers(page, pageSize)
          .then(data => {
             dispatch(actionSetUsers(data.items))
             dispatch(actionSetTotalUsersCount(data.totalCount))

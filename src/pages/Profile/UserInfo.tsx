@@ -1,5 +1,5 @@
 import React from 'react'
-import style from './Profile.module.scss'
+import styles from './Profile.module.scss'
 import defPhoto from '../../assets/img/user-logo.png'
 import {ProfileInfoType} from '../../redux/profilePage/profileType'
 import ProfileStatus from './ProfileStatus'
@@ -15,17 +15,17 @@ function UserInfo(props: PropsUserInfoType) {
 
    const photo = typeof props.userInfo.photos.large === 'string' ? props.userInfo.photos.large : defPhoto
    return (
-      <div className={style.userInf}>
-         <div className={style.userPhoto}>
+      <div className={styles.userInf}>
+         <div className={styles.userPhoto}>
             <img src={photo} alt=""/>
          </div>
-         <div className={style.aboutUser}>
-            <div className={style.userName}>
+         <div className={styles.aboutUser}>
+            <div className={styles.userName}>
                <h1>{props.userInfo.fullName}</h1>
                <p>{props.userInfo.aboutMe}</p>
                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
             </div>
-            <div className={style.userDesc}>
+            <div className={styles.userDesc}>
                {props.userInfo.contacts.facebook &&
                <p>facebook: <a href={props.userInfo.contacts.facebook}>{props.userInfo.contacts.facebook}</a></p>}
                {props.userInfo.contacts.github &&
