@@ -1,13 +1,13 @@
 import React from 'react'
 import styles from './Header.module.scss'
-import {RootStateType} from '../../redux/rootStore'
-import {connect, ConnectedProps} from 'react-redux'
-import {NavLink} from 'react-router-dom'
-import {paths} from '../../layout/paths'
-import {thunkLogout} from '../../redux/authReducer/authAction'
-import Icon, {iconsName, iconsPrefix} from '../Icon/Icon'
+import { RootStateType } from '../../redux/rootStore'
+import { connect, ConnectedProps } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+import { paths } from '../../layout/paths'
+import { thunkLogout } from '../../redux/authReducer/authAction'
+import Icon, { iconsName, iconsPrefix } from '../Icon/Icon'
 
-class Header extends React.Component<PropsFromRedux & {}> {
+class Header extends React.PureComponent<PropsFromRedux & {}> {
    render() {
       return (
          <header className={styles.header}>

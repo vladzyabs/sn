@@ -29,4 +29,4 @@ function LoginForm(props: LoginFormPropsType & InjectedFormProps) {
 
 export default reduxForm<{}>({
    form: 'loginForm',
-})(LoginForm)
+})(React.memo(LoginForm))

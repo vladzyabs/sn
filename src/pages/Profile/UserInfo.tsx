@@ -47,4 +47,4 @@ function UserInfo(props: PropsUserInfoType) {
    )
 }
 
-export default UserInfo
+export default React.memo(UserInfo)

@@ -32,4 +32,4 @@ const mstp = (state: RootStateType) => {
 
 const connector = connect(mstp)
 
-export default connector(Chats)
+export default connector(React.memo(Chats))

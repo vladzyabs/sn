@@ -47,4 +47,4 @@ function Navbar(props: any) {
     )
 }
 
-export default Navbar
+export default React.memo(Navbar)

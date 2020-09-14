@@ -1,12 +1,12 @@
-import React from "react";
-import style from "./Footer.module.scss";
+import React from 'react'
+import style from './Footer.module.scss'
 
 function Footer(props: any) {
-    return (
-        <footer className={style.footer}>
-            FOOTER
-        </footer>
-    )
+   return (
+      <footer className={style.footer}>
+         FOOTER
+      </footer>
+   )
 }
 
-export default Footer
+export default React.memo(Footer)
