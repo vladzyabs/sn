@@ -69,24 +69,23 @@ export const thunkGetUser = (page: number, pageSize: number) =>
       }
    }
 
+const followUnfollowFlow = async (dispatch: Dispatch, apiMethod: any, actionCreator: any, userID: number) => {
+   dispatch(actionToggleFollowingProgress(true, userID))
+   const res = await apiMethod
+   if (res.resultCode === 0) {
+      dispatch(actionCreator)
+   }
+   dispatch(actionToggleFollowingProgress(false, userID))
+}
+
 export const thunkUnfollow = (userID: number) =>
    async (dispatch: Dispatch) => {
-      dispatch(actionToggleFollowingProgress(true, userID))
-      const res = await usersAPI.unfollowUser(userID)
-      if (res.resultCode === 0) {
-         dispatch(actionUnfollowUsers(userID))
-      }
-      dispatch(actionToggleFollowingProgress(false, userID))
+      await followUnfollowFlow(dispatch, usersAPI.unfollowUser(userID), actionUnfollowUsers(userID), userID)
    }
 
 export const thunkFollow = (userID: number) =>
    async (dispatch: Dispatch) => {
-      dispatch(actionToggleFollowingProgress(true, userID))
-      const res = await usersAPI.followUser(userID)
-      if (res.resultCode === 0) {
-         dispatch(actionFollowUsers(userID))
-      }
-      dispatch(actionToggleFollowingProgress(false, userID))
+      await followUnfollowFlow(dispatch, usersAPI.followUser(userID), actionFollowUsers(userID), userID)
    }
 
 export type UsersPageActionType =
