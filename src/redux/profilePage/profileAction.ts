@@ -26,14 +26,14 @@ type ActionAddLikePostType = ReturnType<typeof actionAddLikePost>
 export const actionSetUserInfo = (info: ProfileInfoType) => ({
    type: SET_USER_INFO,
    preloader: info,
-})
+} as const)
 type ActionSetUserInfoType = ReturnType<typeof actionSetUserInfo>
 
 
 export const actionSetStatus = (status: string) => ({
    type: SET_STATUS,
    status,
-})
+} as const)
 type ActionSetStatusType = ReturnType<typeof actionSetStatus>
 
 // thunks ==============================================================================================================

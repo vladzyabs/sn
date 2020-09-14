@@ -1,3 +1,4 @@
+import { Dispatch } from 'redux'
 import {
    FOLLOW_USER,
    SET_CURRENT_PAGE,
@@ -7,106 +8,92 @@ import {
    UNFOLLOW_USER,
    UserType,
 } from './usersType'
-import {usersAPI} from '../../api/api'
+import { usersAPI } from '../../api/api'
 
-type ActionFollowUsersType = { type: typeof FOLLOW_USER, userID: number }
-export const actionFollowUsers = (userID: number): ActionFollowUsersType => {
-   return {
-      type: FOLLOW_USER,
-      userID,
-   }
-};
+// actions =============================================================================================================
 
-type ActionUnfollowUsersType = { type: typeof UNFOLLOW_USER, userID: number }
-export const actionUnfollowUsers = (userID: number): ActionUnfollowUsersType => {
-   return {
-      type: UNFOLLOW_USER,
-      userID,
-   }
-};
+export const actionFollowUsers = (userID: number) => ({
+   type: FOLLOW_USER,
+   userID,
+} as const)
+type FollowUsersActionType = ReturnType<typeof actionFollowUsers>
 
-type ActionSetUserType = { type: typeof SET_USERS, users: UserType[] }
-export const actionSetUsers = (users: UserType[]): ActionSetUserType => {
-   return {
-      type: SET_USERS,
-      users,
-   }
-};
+export const actionUnfollowUsers = (userID: number) => ({
+   type: UNFOLLOW_USER,
+   userID,
+} as const)
+type UnfollowUsersActionType = ReturnType<typeof actionUnfollowUsers>
 
-type ActionSetCurrentPage = { type: typeof SET_CURRENT_PAGE, page: number }
-export const actionSetCurrentPage = (page: number): ActionSetCurrentPage => {
-   return {
-      type: SET_CURRENT_PAGE,
-      page,
-   }
-}
+export const actionSetUsers = (users: UserType[]) => ({
+   type: SET_USERS,
+   users,
+} as const)
+type SetUserActionType = ReturnType<typeof actionSetUsers>
 
-type ActiolnSetTotalUsersCount = { type: typeof SET_TOTAL_USERS_COUNT, count: number }
-export const actionSetTotalUsersCount = (count: number): ActiolnSetTotalUsersCount => {
-   return {
-      type: SET_TOTAL_USERS_COUNT,
-      count,
-   }
-}
+export const actionSetCurrentPage = (page: number) => ({
+   type: SET_CURRENT_PAGE,
+   page,
+} as const)
+type SetCurrentPageActionType = ReturnType<typeof actionSetCurrentPage>
 
-type ActionSetLoading = { type: typeof SET_LOADING, payload: boolean }
-export const actionSetLoading = (loading: boolean): ActionSetLoading => {
-   return {
-      type: SET_LOADING,
-      payload: loading,
-   }
-}
+export const actionSetTotalUsersCount = (count: number) => ({
+   type: SET_TOTAL_USERS_COUNT,
+   count,
+} as const)
+type SetTotalUsersCountActionType = ReturnType<typeof actionSetTotalUsersCount>
 
-type ToggleFollowingProgress = { type: typeof TOGGLE_FOLLOWING_PROGRESS, isFetching: boolean, userID: number }
-export const actionToggleFollowingProgress = (isFetching: boolean, userID: number): ToggleFollowingProgress => {
-   return {
-      type: TOGGLE_FOLLOWING_PROGRESS,
-      isFetching,
-      userID,
-   }
-}
+export const actionSetLoading = (loading: boolean) => ({
+   type: SET_LOADING,
+   payload: loading,
+} as const)
+type SetLoadingActionType = ReturnType<typeof actionSetLoading>
+
+export const actionToggleFollowingProgress = (isFetching: boolean, userID: number) => ({
+   type: TOGGLE_FOLLOWING_PROGRESS,
+   isFetching,
+   userID,
+} as const)
+type ToggleFollowingProgress = ReturnType<typeof actionToggleFollowingProgress>
+
+// thunks ==============================================================================================================
 
 export const thunkGetUser = (page: number, pageSize: number) =>
-   (dispatch: any) => {
+   async (dispatch: Dispatch) => {
       dispatch(actionSetLoading(true))
       dispatch(actionSetCurrentPage(page))
-      usersAPI.getUsers(page, pageSize)
-         .then(data => {
-            dispatch(actionSetUsers(data.items))
-            dispatch(actionSetTotalUsersCount(data.totalCount))
-            dispatch(actionSetLoading(false))
-         })
+      const res = await usersAPI.getUsers(page, pageSize)
+      if (res.items) {
+         dispatch(actionSetUsers(res.items))
+         dispatch(actionSetTotalUsersCount(res.totalCount))
+         dispatch(actionSetLoading(false))
+      }
    }
 
 export const thunkUnfollow = (userID: number) =>
-   (dispatch: any) => {
+   async (dispatch: Dispatch) => {
       dispatch(actionToggleFollowingProgress(true, userID))
-      usersAPI.unfollowUser(userID)
-         .then(data => {
-            if (data.resultCode === 0) {
-               dispatch(actionUnfollowUsers(userID))
-            }
-            dispatch(actionToggleFollowingProgress(false, userID))
-         })
+      const res = await usersAPI.unfollowUser(userID)
+      if (res.resultCode === 0) {
+         dispatch(actionUnfollowUsers(userID))
+      }
+      dispatch(actionToggleFollowingProgress(false, userID))
    }
 
 export const thunkFollow = (userID: number) =>
-   (dispatch: any) => {
+   async (dispatch: Dispatch) => {
       dispatch(actionToggleFollowingProgress(true, userID))
-      usersAPI.followUser(userID)
-         .then(data => {
-            if (data.resultCode === 0) {
-               dispatch(actionFollowUsers(userID))
-            }
-            dispatch(actionToggleFollowingProgress(false, userID))
-         })
+      const res = await usersAPI.followUser(userID)
+      if (res.resultCode === 0) {
+         dispatch(actionFollowUsers(userID))
+      }
+      dispatch(actionToggleFollowingProgress(false, userID))
    }
 
 export type UsersPageActionType =
-   ActionFollowUsersType
-   | ActionUnfollowUsersType
-   | ActionSetUserType
-   | ActionSetCurrentPage
-   | ActiolnSetTotalUsersCount
-   | ActionSetLoading
+   FollowUsersActionType
+   | UnfollowUsersActionType
+   | SetUserActionType
+   | SetCurrentPageActionType
+   | SetTotalUsersCountActionType
+   | SetLoadingActionType
    | ToggleFollowingProgress
