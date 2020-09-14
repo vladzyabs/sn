@@ -21,4 +21,4 @@ function Dialogs(props: PropsDialogsType) {
    )
 }
 
-export default withAuthRedirect(Dialogs)
+export default withAuthRedirect(React.memo(Dialogs))

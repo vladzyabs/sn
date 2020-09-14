@@ -55,4 +55,4 @@ const ProfileStatus = (props: ProfileStatusPropsType) => {
    )
 }
 
-export default ProfileStatus
+export default React.memo(ProfileStatus)

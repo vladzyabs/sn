@@ -13,8 +13,7 @@ type PropsMyPostsType = {
    addLike: (id: string) => void
 }
 
-function MyPost(props: PropsMyPostsType) {
-
+const MyPost = (props: PropsMyPostsType) => {
    const addPost = (formData: any) => {
       props.addPost(formData.newPostBody)
    }
@@ -62,4 +61,4 @@ const AddPostReduxForm = reduxForm<{}>({
 
 // -------------------------------------------------------------------------------------------------------------------
 
-export default MyPost
+export default React.memo(MyPost)

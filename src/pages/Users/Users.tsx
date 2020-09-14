@@ -65,4 +65,4 @@ function Users(props: PropsUsersType) {
    )
 }
 
-export default Users
+export default React.memo(Users)

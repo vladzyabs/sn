@@ -18,5 +18,5 @@ function Chat(props: PropsChatType) {
     )
 }
 
-export default Chat
+export default React.memo(Chat)
 

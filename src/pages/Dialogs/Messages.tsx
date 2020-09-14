@@ -75,4 +75,4 @@ const mdtp = {
 
 const connector = connect(mstp, mdtp)
 
-export default connector(Messages)
+export default connector(React.memo(Messages))

@@ -15,9 +15,11 @@ type PropsProfileType = {
 }
 
 function Profile(props: PropsProfileType) {
+
    if (!props.profileInfo) {
       return <Preloader/>
    }
+
    return (
       <div className={styles.profile}>
 
@@ -33,4 +35,4 @@ function Profile(props: PropsProfileType) {
    )
 }
 
-export default Profile
+export default React.memo(Profile)

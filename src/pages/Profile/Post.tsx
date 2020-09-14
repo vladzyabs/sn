@@ -12,7 +12,7 @@ function Post(props: PropsPostType) {
 
     const addLike = () => {
         props.addLike(props.post.id)
-    };
+    }
 
     return (
         <div className={style.post}>
@@ -32,4 +32,4 @@ function Post(props: PropsPostType) {
     )
 }
 
-export default Post
+export default React.memo(Post)

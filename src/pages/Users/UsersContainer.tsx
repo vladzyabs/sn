@@ -9,7 +9,7 @@ import * as userSelectors from '../../redux/usersPage/userSelectors'
 type PropsUsersType = PropsFromRedux
    & {}
 
-class UsersContainer extends React.Component<PropsUsersType> {
+class UsersContainer extends React.PureComponent<PropsUsersType> {
 
    componentDidMount(): void {
       this.props.thunkGetUser(this.props.currentPage, this.props.pageSize)
@@ -21,7 +21,6 @@ class UsersContainer extends React.Component<PropsUsersType> {
    }
 
    render() {
-      debugger
       return <>
          {this.props.isLoading && <Preloader/>}
          <Users users={this.props.users}

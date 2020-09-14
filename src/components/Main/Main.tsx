@@ -31,4 +31,4 @@ function Main(props: PropsMainType) {
    )
 }
 
-export default Main
+export default React.memo(Main)

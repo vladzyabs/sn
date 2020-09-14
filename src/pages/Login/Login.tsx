@@ -39,4 +39,4 @@ const connector = connect(mstp, mdtp)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
-export default connector(Login)
+export default connector(React.memo(Login))
