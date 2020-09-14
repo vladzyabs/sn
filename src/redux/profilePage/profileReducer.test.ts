@@ -68,3 +68,11 @@ test('user information must be set', () => {
    expect(endState.profileInfo).toBeDefined()
    expect(endState.profileInfo && endState.profileInfo.userId).toBe(1)
 })
+
+test('post should be deleted', () => {
+   const endState: ProfileStateType = profileReducer(initialState, action.actionDeletePost(id1))
+
+   expect(endState.posts.length).toBe(2)
+   expect(endState.posts[0].id).toBe(initialState.posts[1].id)
+   expect(endState.posts[1].id).toBe(initialState.posts[2].id)
+})

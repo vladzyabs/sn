@@ -1,6 +1,6 @@
-import {ADD_LIKE_POST, ADD_POST, ProfileStateType, SET_STATUS, SET_USER_INFO} from './profileType'
-import {v1} from 'uuid'
-import {ProfilePageActionType} from './profileAction'
+import { ADD_LIKE_POST, ADD_POST, DELETE_POST, ProfileStateType, SET_STATUS, SET_USER_INFO } from './profileType'
+import { v1 } from 'uuid'
+import { ProfilePageActionType } from './profileAction'
 
 let initialState: ProfileStateType = {
    posts: [
@@ -22,7 +22,7 @@ const profileReducer = (state = initialState, action: ProfilePageActionType): Pr
          return {
             ...state,
             profileInfo: action.preloader,
-         };
+         }
       case ADD_POST:
          if (action.value) {
             return {
@@ -30,6 +30,8 @@ const profileReducer = (state = initialState, action: ProfilePageActionType): Pr
                posts: [{id: v1(), postValue: action.value.trim(), countLike: 0}, ...state.posts],
             }
          } else return {...state}
+      case DELETE_POST:
+         return {...state, posts: state.posts.filter(p => p.id !== action.postID)}
       case ADD_LIKE_POST:
          let index = state.posts.findIndex(post => post.id === action.idPost);
          return {
@@ -40,7 +42,7 @@ const profileReducer = (state = initialState, action: ProfilePageActionType): Pr
                }
                return post
             }),
-         };
+         }
       case SET_STATUS:
          return {
             ...state,

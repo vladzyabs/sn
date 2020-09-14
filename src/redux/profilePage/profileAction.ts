@@ -1,4 +1,4 @@
-import {ADD_LIKE_POST, ADD_POST, ProfileInfoType, SET_STATUS, SET_USER_INFO} from './profileType'
+import { ADD_LIKE_POST, ADD_POST, DELETE_POST, ProfileInfoType, SET_STATUS, SET_USER_INFO } from './profileType'
 import {profileAPI} from '../../api/api'
 
 type ActionAddPostType = { type: typeof ADD_POST, value: string }
@@ -33,6 +33,12 @@ export const actionSetStatus = (status: string): ActionSetStatusType => {
    }
 }
 
+export const actionDeletePost = (postID: string) => ({
+   type: DELETE_POST,
+   postID
+} as const)
+type DeletePostActionType = ReturnType<typeof actionDeletePost>
+
 export const thunkGetUserInfo = (userID: number) =>
    (dispatch: any) => {
       profileAPI.getProfileInfo(userID)
@@ -57,6 +63,7 @@ export const thunkUpdateStatus = (status: string) =>
 
 export type ProfilePageActionType =
    ActionAddPostType
+   | DeletePostActionType
    | ActionAddLikePostType
    | ActionSetUserInfoType
    | ActionSetStatusType
