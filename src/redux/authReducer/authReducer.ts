@@ -1,12 +1,12 @@
-import {AuthType} from './authTypes'
-import {AuthActionType} from './authAction'
+import { AuthType } from './authTypes'
+import { AuthActionType } from './authAction'
 
 const initialState: AuthType = {
    id: null,
    login: null,
    email: null,
    isAuth: false,
-}
+} as const
 
 type InitialStateType = typeof initialState
 

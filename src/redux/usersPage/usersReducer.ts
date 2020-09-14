@@ -1,7 +1,7 @@
 import {
    UsersPageActionType,
 } from './usersAction'
-import {UsersStateType} from './usersType'
+import { UsersStateType } from './usersType'
 
 let initialState: UsersStateType = {
    users: [],
@@ -23,7 +23,7 @@ const usersReducer = (state = initialState, action: UsersPageActionType): UsersS
                }
                return user
             }),
-         };
+         }
       case 'UNFOLLOW_USER':
          return {
             ...state,
@@ -33,19 +33,13 @@ const usersReducer = (state = initialState, action: UsersPageActionType): UsersS
                }
                return user
             }),
-         };
+         }
       case 'SET_USERS':
-         return {...state, users: action.users};
+         return {...state, users: action.users}
       case 'SET_CURRENT_PAGE':
-         return {
-            ...state,
-            currentPage: action.page,
-         }
+         return {...state, currentPage: action.page}
       case 'SET_TOTAL_USERS_COUNT':
-         return {
-            ...state,
-            totalCount: action.count,
-         }
+         return {...state, totalCount: action.count}
       case 'SET_LOADING':
          return {...state, isLoading: action.payload}
       case 'TOGGLE_FOLLOWING_PROGRESS':
