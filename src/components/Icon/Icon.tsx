@@ -24,6 +24,8 @@ export const iconsName = {
    pen: 'pen',
    signInAlt: 'sign-in-alt',
    signOutAlt: 'sign-out-alt',
+   chevronRight: 'chevron-right',
+   chevronLeft: 'chevron-left',
 };
 
 type IconProps = {

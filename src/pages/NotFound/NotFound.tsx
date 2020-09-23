@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import { paths } from '../../layout/paths'
 import Icon, { iconsName, iconsPrefix } from '../../components/Icon/Icon'
 
-export const NotFound = React.memo(({location}: any) => {
+const NotFound = React.memo(({location}: any) => {
    return (
       <div className={style.whoopsWrapper}>
          <h1 className={style.title}>404 page '{location.pathname}' not found</h1>
@@ -13,3 +13,5 @@ export const NotFound = React.memo(({location}: any) => {
       </div>
    )
 })
+
+export default NotFound
