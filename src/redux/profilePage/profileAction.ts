@@ -1,6 +1,14 @@
-import { ADD_LIKE_POST, ADD_POST, DELETE_POST, ProfileInfoType, SET_STATUS, SET_USER_INFO } from './profileType'
-import { profileAPI } from '../../api/api'
-import { Dispatch } from 'redux'
+import {
+   ADD_LIKE_POST,
+   ADD_POST,
+   DELETE_POST,
+   ProfileInfoType, SET_PHOTO_LOADING,
+   SET_STATUS,
+   SET_USER_INFO,
+   SET_USER_PHOTO,
+} from './profileType'
+import {profileAPI} from '../../api/api'
+import {Dispatch} from 'redux'
 
 // actions =============================================================================================================
 
@@ -36,6 +44,19 @@ export const actionSetStatus = (status: string) => ({
 } as const)
 type ActionSetStatusType = ReturnType<typeof actionSetStatus>
 
+export const setUserPhoto = (small: string, large: string) => ({
+   type: SET_USER_PHOTO,
+   small,
+   large,
+} as const)
+type SetUserPhotoActionType = ReturnType<typeof setUserPhoto>
+
+export const setPhotoLoading = (value: boolean) => ({
+   type: SET_PHOTO_LOADING,
+   value,
+} as const)
+type SetPhotoLoadingActionType = ReturnType<typeof setPhotoLoading>
+
 // thunks ==============================================================================================================
 
 export const thunkGetUserInfo = (userID: number) =>
@@ -60,9 +81,27 @@ export const thunkUpdateStatus = (status: string) =>
       }
    }
 
+export const uploadUserPhoto = (file: any) =>
+   async (dispatch: Dispatch) => {
+      dispatch(setPhotoLoading(true))
+      const res = await profileAPI.uploadPhoto(file)
+      try {
+         if (res.data.resultCode === 0) {
+            dispatch(setUserPhoto(res.data.data.photos.small, res.data.data.photos.large))
+            dispatch(setPhotoLoading(false))
+         } else {
+            dispatch(setPhotoLoading(false))
+         }
+      } catch (error) {
+         throw error
+      }
+   }
+
 export type ProfilePageActionType =
    ActionAddPostType
    | DeletePostActionType
    | ActionAddLikePostType
    | ActionSetUserInfoType
    | ActionSetStatusType
+   | SetUserPhotoActionType
+   | SetPhotoLoadingActionType
