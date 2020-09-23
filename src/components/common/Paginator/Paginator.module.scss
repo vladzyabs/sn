@@ -1,0 +1,42 @@
+@import "../../../style/variables";
+@import "../../../style/style";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  .item {
+    transition: 0.2s;
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px 3px;
+    min-width: 40px;
+    border-radius: $borderRadius;
+    background: $color-white;
+    margin-right: 5px;
+    text-align: center;
+    @extend %box-shadow;
+    &:hover {
+      transform: translateY(-1px);
+    }
+  }
+
+  button {
+    border: none;
+    &:hover {
+      background: $color-greenish-blue;
+      color: $color-white;
+    }
+    &:disabled {
+      background: $color-white;
+      color: $color-black;
+      opacity: 0.6;
+    }
+  }
+
+  .currentPage {
+    background: $color-greenish-blue;
+    color: $color-white;
+  }
+}
