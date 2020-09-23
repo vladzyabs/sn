@@ -8,7 +8,6 @@ import withAuthRedirect from '../../components/hoc/AuthRedirect'
 import {compose} from 'redux'
 
 type PropsProfileType = PropsFromRedux & RouteComponentProps<{ id: string }>
-   & {}
 
 class ProfileContainer extends React.Component<PropsProfileType> {
 
@@ -20,7 +19,7 @@ class ProfileContainer extends React.Component<PropsProfileType> {
    }
 
    render() {
-      return <Profile {...this.props}/>
+      return <Profile {...this.props} isOwner={!this.props.match.params.id}/>
    }
 }
 

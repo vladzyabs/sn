@@ -26,6 +26,7 @@
     height: 240px;
     min-width: 240px;
     min-height: 240px;
+    position: relative;
 
     img {
       display: block;
@@ -34,6 +35,24 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
+    }
+
+    .photoUpload {
+      cursor: pointer;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      background: $color-white;
+      max-width: 240px;
+      display: none;
+    }
+
+    &:hover {
+      .photoUpload {
+        display: block;
+      }
     }
   }
 

@@ -6,10 +6,11 @@ import {ProfileInfoType} from '../../redux/profilePage/profileType'
 import Preloader from '../../components/common/Preloader/Preloader'
 
 type PropsProfileType = {
+   isOwner: boolean
    posts: any
    status: string
-   updateStatus: (status: string) => void
    profileInfo: ProfileInfoType
+   updateStatus: (status: string) => void
    addPost: (value: string) => void
    addLike: (id: string) => void
 }
@@ -23,7 +24,8 @@ function Profile(props: PropsProfileType) {
    return (
       <div className={styles.profile}>
 
-         <UserInfo userInfo={props.profileInfo}
+         <UserInfo isOwner={props.isOwner}
+                   userInfo={props.profileInfo}
                    status={props.status}
                    updateStatus={props.updateStatus}/>
 
