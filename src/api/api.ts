@@ -38,6 +38,13 @@ export const profileAPI = {
       return instance
          .put<ResponseType>(`/profile/status`, {status: status})
    },
+   uploadPhoto(photoFile: any) {
+      const formData = new FormData()
+      formData.append('image', photoFile)
+
+      return instance
+         .put<ResponseType<{photos: {small: string, large: string}}>>(`/profile/photo`, formData)
+   },
 }
 
 export const usersAPI = {

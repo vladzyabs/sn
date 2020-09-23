@@ -1,8 +1,11 @@
-import React, {ChangeEvent} from 'react'
+import React from 'react'
 import styles from './Profile.module.scss'
 import defPhoto from '../../assets/img/user-logo.png'
 import {ProfileInfoType} from '../../redux/profilePage/profileType'
 import ProfileStatus from './ProfileStatus'
+import {useDispatch, useSelector} from 'react-redux'
+import {uploadUserPhoto} from '../../redux/profilePage/profileAction'
+import {RootStateType} from '../../redux/rootStore'
 
 type PropsUserInfoType = {
    userInfo: ProfileInfoType
@@ -12,17 +15,25 @@ type PropsUserInfoType = {
 }
 
 function UserInfo(props: PropsUserInfoType) {
+   const dispatch = useDispatch()
+   const photoLoading = useSelector<RootStateType, boolean>(state => state.profileData.photoLoading)
+
    if (!props.userInfo) return null
 
    const photo = typeof props.userInfo.photos.large === 'string' ? props.userInfo.photos.large : defPhoto
 
-   const onChangePhoto = (e: ChangeEvent<HTMLInputElement>) => {
-      console.log(e.target.files && e.target.files[0])
+   const onChangePhoto = (e: any) => {
+      if (e.target.files.length) {
+         if (window.confirm('Are you sure you want to change the photo?')) {
+            dispatch(uploadUserPhoto(e.target.files[0]))
+         }
+      }
    }
 
    return (
       <div className={styles.userInf}>
          <div className={styles.userPhoto}>
+            {photoLoading && <div className={styles.photoLoading}>loading...</div>}
             <img src={photo} alt=""/>
             {
                props.isOwner && <input type="file" className={styles.photoUpload} onChange={onChangePhoto}/>

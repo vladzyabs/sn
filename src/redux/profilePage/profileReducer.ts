@@ -1,6 +1,14 @@
-import { ADD_LIKE_POST, ADD_POST, DELETE_POST, ProfileStateType, SET_STATUS, SET_USER_INFO } from './profileType'
-import { v1 } from 'uuid'
-import { ProfilePageActionType } from './profileAction'
+import {
+   ADD_LIKE_POST,
+   ADD_POST,
+   DELETE_POST,
+   ProfileStateType, SET_PHOTO_LOADING,
+   SET_STATUS,
+   SET_USER_INFO,
+   SET_USER_PHOTO,
+} from './profileType'
+import {v1} from 'uuid'
+import {ProfilePageActionType} from './profileAction'
 
 let initialState: ProfileStateType = {
    posts: [
@@ -14,7 +22,8 @@ let initialState: ProfileStateType = {
    ],
    status: '',
    profileInfo: null,
-};
+   photoLoading: false,
+}
 
 const profileReducer = (state = initialState, action: ProfilePageActionType): ProfileStateType => {
    switch (action.type) {
@@ -33,7 +42,7 @@ const profileReducer = (state = initialState, action: ProfilePageActionType): Pr
       case DELETE_POST:
          return {...state, posts: state.posts.filter(p => p.id !== action.postID)}
       case ADD_LIKE_POST:
-         let index = state.posts.findIndex(post => post.id === action.idPost);
+         let index = state.posts.findIndex(post => post.id === action.idPost)
          return {
             ...state,
             posts: state.posts.map(post => {
@@ -48,9 +57,26 @@ const profileReducer = (state = initialState, action: ProfilePageActionType): Pr
             ...state,
             status: action.status,
          }
+      case SET_USER_PHOTO:
+         return {
+            ...state,
+            //@ts-ignore
+            profileInfo: {
+               ...state.profileInfo,
+               photos: {
+                  small: action.small,
+                  large: action.large,
+               },
+            },
+         }
+      case SET_PHOTO_LOADING:
+         return {
+            ...state,
+            photoLoading: action.value,
+         }
       default:
          return state
    }
-};
+}
 
 export default profileReducer
