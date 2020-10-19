@@ -9,7 +9,7 @@ export const SET_USER_PHOTO = 'SET_USER_PHOTO'
 export const SET_PHOTO_LOADING = 'SET_PHOTO_LOADING'
 
 // profile type
-export type ProfileInfoType = ProfileDataType | null
+export type ProfileInfoType = ProfileDataType
 export type PostsType = {
    id: string
    postValue: string

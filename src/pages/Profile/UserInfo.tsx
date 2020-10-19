@@ -21,7 +21,9 @@ function UserInfo(props: PropsUserInfoType) {
    const photoLoading = useSelector<RootStateType, boolean>(state => state.profileData.photoLoading)
    const [editMode, setEditMode] = React.useState<boolean>(false)
 
-   if (!props.userInfo) return null
+   if (Object.keys(props.userInfo).length === 0) {
+      return null
+   }
 
    const photo = typeof props.userInfo.photos.large === 'string' ? props.userInfo.photos.large : defPhoto
 
@@ -35,11 +37,16 @@ function UserInfo(props: PropsUserInfoType) {
 
    const onChangeEditeMode = () => setEditMode(prevState => !prevState)
 
+   const onFormSubmit = (formData: any) => {
+      console.log(formData)
+      onChangeEditeMode()
+   }
+
    return (
       <div className={styles.userInf}>
 
          <div className={styles.btnChangeEditMode}
-              onDoubleClick={onChangeEditeMode}> <FontAwesomeIcon icon={'cog'}/> </div>
+              onDoubleClick={onChangeEditeMode}><FontAwesomeIcon icon={'cog'}/></div>
 
          <div className={styles.userPhoto}>
             {photoLoading && <div className={styles.photoLoading}>loading...</div>}
@@ -53,13 +60,14 @@ function UserInfo(props: PropsUserInfoType) {
          </div>
 
          {
-            editMode
-               ? <ProfileDataForm/>
+            !editMode
+               // @ts-ignore
+               ? <ProfileDataForm userInfo={props.userInfo}
+                                  formSubmit={onFormSubmit}/>
                : <ProfileData status={props.status}
-                             isOwner={props.isOwner}
-                             userInfo={props.userInfo}
-                             updateStatus={props.updateStatus}
-               />
+                              isOwner={props.isOwner}
+                              userInfo={props.userInfo}
+                              updateStatus={props.updateStatus}/>
          }
 
       </div>
