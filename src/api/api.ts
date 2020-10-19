@@ -71,6 +71,6 @@ export const usersAPI = {
 
 export const securityAPI = {
    getCaptchaUrl() {
-      return instance.get(`security/get-captcha-url`)
+      return instance.get<{url: string}>(`security/get-captcha-url`)
    }
 }

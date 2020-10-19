@@ -1,19 +1,24 @@
-import { SET_USER_DATA } from './authTypes'
-import { authAPI } from '../../api/api'
-import { AuthMeDataType } from '../../api/apiType'
-import { Dispatch } from 'redux'
-import { stopSubmit } from 'redux-form'
+import {SET_USER_DATA, GET_CAPTCHA_URL_SUCCESS} from './authTypes'
+import {authAPI, securityAPI} from '../../api/api'
+import {AuthMeDataType} from '../../api/apiType'
+import {Dispatch} from 'redux'
+import {stopSubmit} from 'redux-form'
 
 // actions =============================================================================================================
 
 export const setAuthDataAC = (payload: AuthMeDataType, isAuth: boolean) => ({
    type: SET_USER_DATA,
-   id: payload.id,
-   login: payload.login,
-   email: payload.email,
-   isAuth: isAuth,
+   payload,
 } as const)
 type SetAuthDataActionType = ReturnType<typeof setAuthDataAC>
+
+export const getCaptchaUrlSuccess = (captchaUrl: string) => ({
+   type: GET_CAPTCHA_URL_SUCCESS,
+   payload: {
+      captchaUrl,
+   },
+} as const)
+type SetCaptchaUrlActionType = ReturnType<typeof getCaptchaUrlSuccess>
 
 // thunks ==============================================================================================================
 
@@ -44,5 +49,12 @@ export const thunkLogout = () =>
       }
    }
 
+export const getCaptchaUrl = () =>
+   async (dispatch: Dispatch) => {
+      const res = await securityAPI.getCaptchaUrl()
+      const captchaUrl = res.data.url
+   }
+
 export type AuthActionType
    = SetAuthDataActionType
+   | SetCaptchaUrlActionType
