@@ -10,6 +10,13 @@ export type AuthMeDataType = {
    login: string | null
 }
 
+export type LoginParamsType = {
+   email: string
+   password: string
+   rememberMe: boolean
+   captcha?: string
+}
+
 export type ProfileDataType = {
    userId: number
    lookingForAJob: boolean
