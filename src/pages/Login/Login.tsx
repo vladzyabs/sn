@@ -3,19 +3,22 @@ import LoginForm from './LoginForm'
 import {Redirect} from 'react-router-dom'
 import {RootStateType} from '../../redux/rootStore'
 import {thunkLogin} from '../../redux/authReducer/authAction'
-import {connect, ConnectedProps} from 'react-redux'
 import {paths} from '../../layout/paths'
-import {getIsAuth} from '../../redux/authReducer/authSelectors'
+import {getCaptcha, getIsAuth} from '../../redux/authReducer/authSelectors'
+import {useDispatch, useSelector} from 'react-redux'
 
 type LoginPropsType = {}
 
-function Login(props: LoginPropsType & PropsFromRedux) {
+function Login(props: LoginPropsType) {
+
+   const dispatch = useDispatch()
+   const isAuth = useSelector<RootStateType>(state => state.auth.isAuth)
 
    const onSubmit = (formData: any) => {
-      props.login(formData.login, formData.password, formData.rememberMe)
+      dispatch(thunkLogin({...formData}))
    }
 
-   if (props.isAuth) {
+   if (isAuth) {
       return <Redirect to={paths.profile}/>
    }
 
@@ -27,16 +30,4 @@ function Login(props: LoginPropsType & PropsFromRedux) {
    )
 }
 
-const mstp = (state: RootStateType) => ({
-   isAuth: getIsAuth(state),
-})
-
-const mdtp = {
-   login: (email: string, password: string, rememberMe: boolean = false) => thunkLogin(email, password, rememberMe),
-}
-
-const connector = connect(mstp, mdtp)
-
-type PropsFromRedux = ConnectedProps<typeof connector>
-
-export default connector(React.memo(Login))
+export default React.memo(Login)

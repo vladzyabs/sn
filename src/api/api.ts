@@ -1,5 +1,12 @@
 import * as axios from 'axios'
-import {ResponseType, AuthMeDataType, ProfileDataType, UsersDataType, SaveProfileParamsType} from './apiType'
+import {
+   ResponseType,
+   AuthMeDataType,
+   ProfileDataType,
+   UsersDataType,
+   SaveProfileParamsType,
+   LoginParamsType,
+} from './apiType'
 
 const instance = axios.default.create({
    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -15,9 +22,9 @@ export const authAPI = {
          .get<ResponseType<AuthMeDataType>>('auth/me')
          .then(response => response.data)
    },
-   login(email: string, password: string, rememberMe: boolean = false) {
+   login(data: LoginParamsType) {
       return instance
-         .post<ResponseType<{ userId: number }>>(`auth/login`, {email, password, rememberMe})
+         .post<ResponseType<{ userId: number }>>(`auth/login`, data)
    },
    logout() {
       return instance
