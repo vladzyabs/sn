@@ -124,6 +124,10 @@
 
     .formDataItem {
       margin-bottom: 10px;
+
+      input, textarea {
+        display: block;
+      }
     }
   }
 

@@ -6,6 +6,7 @@ import {connect, ConnectedProps} from 'react-redux'
 import Profile from './Profile'
 import withAuthRedirect from '../../components/hoc/AuthRedirect'
 import {compose} from 'redux'
+import {SaveProfileParamsType} from '../../api/apiType'
 
 type PropsProfileType = PropsFromRedux & RouteComponentProps<{ id: string }>
 
@@ -38,6 +39,7 @@ const mdtp = {
    updateStatus: (status: string) => (actions.thunkUpdateStatus(status)),
    addPost: (value: string) => (actions.actionAddPost(value)),
    addLike: (id: string) => (actions.actionAddLikePost(id)),
+   saveProfile: (userID: number, profileData: SaveProfileParamsType) => (actions.saveProfile(userID, profileData))
 }
 
 const connector = connect(mstp, mdtp)

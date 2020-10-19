@@ -22,13 +22,13 @@ function ProfileData(props: ProfileDataPropsType) {
                : <span className={styles.statusOffEditMode}>{props.status}</span>}
          </div>
          <div className={styles.userDesc}>
-            {props.userInfo.lookingForAJob && <div>Looking for a job</div>}
+            <div>Looking for a job: {props.userInfo.lookingForAJob ? 'yes' : 'no'}</div>
             {
                Object.keys(props.userInfo.contacts).map(key =>
                   // @ts-ignore
-                  props.userInfo.contacts[key] === true
+                  props.userInfo.contacts[key]
                      // @ts-ignore
-                     ? <Contact value={props.userInfo.contacts[key]} title={key}/>
+                     ? <Contact key={key} value={props.userInfo.contacts[key]} title={key}/>
                      : null,
                )
             }

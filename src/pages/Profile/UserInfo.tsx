@@ -8,12 +8,14 @@ import {RootStateType} from '../../redux/rootStore'
 import ProfileData from './ProfileData'
 import ProfileDataForm from './ProfileDataForm'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {SaveProfileParamsType} from '../../api/apiType'
 
 type PropsUserInfoType = {
    userInfo: ProfileInfoType
    status: string
    isOwner: boolean
    updateStatus: (status: string) => void
+   saveProfile: (userID: number, profileData: SaveProfileParamsType) => void
 }
 
 function UserInfo(props: PropsUserInfoType) {
@@ -35,18 +37,18 @@ function UserInfo(props: PropsUserInfoType) {
       }
    }
 
-   const onChangeEditeMode = () => setEditMode(prevState => !prevState)
+   const onChangeEditMode = () => setEditMode(prevState => !prevState)
 
    const onFormSubmit = (formData: any) => {
-      console.log(formData)
-      onChangeEditeMode()
+      props.saveProfile(props.userInfo.userId, formData)
+      // onChangeEditMode()
    }
 
    return (
       <div className={styles.userInf}>
 
          <div className={styles.btnChangeEditMode}
-              onDoubleClick={onChangeEditeMode}><FontAwesomeIcon icon={'cog'}/></div>
+              onDoubleClick={onChangeEditMode}><FontAwesomeIcon icon={'cog'}/></div>
 
          <div className={styles.userPhoto}>
             {photoLoading && <div className={styles.photoLoading}>loading...</div>}
@@ -60,8 +62,7 @@ function UserInfo(props: PropsUserInfoType) {
          </div>
 
          {
-            !editMode
-               // @ts-ignore
+            editMode
                ? <ProfileDataForm userInfo={props.userInfo}
                                   formSubmit={onFormSubmit}/>
                : <ProfileData status={props.status}
