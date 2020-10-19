@@ -6,6 +6,7 @@
   }
 
   .userInf {
+    position: relative;
     color: $color-black;
 
     a {
@@ -68,6 +69,14 @@
     }
   }
 
+  .btnChangeEditMode {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    color: $color-greenish-blue;
+  }
+
   .aboutUser {
     @extend %box-shadow;
     background: $color-white;
@@ -105,6 +114,20 @@
 
     &:hover + .statusIcon {
       display: inline-block;
+    }
+  }
+
+  .formData {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .formDataItem {
+      margin-bottom: 10px;
+
+      input, textarea {
+        display: block;
+      }
     }
   }
 

@@ -9,6 +9,7 @@ import {
 } from './profileType'
 import {v1} from 'uuid'
 import {ProfilePageActionType} from './profileAction'
+import {ProfileDataType} from '../../api/apiType'
 
 let initialState: ProfileStateType = {
    posts: [
@@ -21,7 +22,7 @@ let initialState: ProfileStateType = {
       {id: v1(), postValue: 'post 7', countLike: 20},
    ],
    status: '',
-   profileInfo: null,
+   profileInfo: {} as ProfileDataType,
    photoLoading: false,
 }
 

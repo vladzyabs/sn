@@ -32,6 +32,23 @@ export type ProfileDataType = {
    }
 }
 
+export type SaveProfileParamsType = {
+   userId: number
+   lookingForAJob: boolean
+   lookingForAJobDescription: string
+   fullName: string
+   contacts: {
+      github: string
+      vk: string
+      facebook: string
+      instagram: string
+      twitter: string
+      website: string
+      youtube: string
+      mainLink: string
+   }
+}
+
 export type UserApiType = {
    id: number
    name: string

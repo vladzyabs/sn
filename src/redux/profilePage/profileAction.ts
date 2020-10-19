@@ -9,6 +9,7 @@ import {
 } from './profileType'
 import {profileAPI} from '../../api/api'
 import {Dispatch} from 'redux'
+import {SaveProfileParamsType} from '../../api/apiType'
 
 // actions =============================================================================================================
 
@@ -84,13 +85,25 @@ export const thunkUpdateStatus = (status: string) =>
 export const uploadUserPhoto = (file: any) =>
    async (dispatch: Dispatch) => {
       dispatch(setPhotoLoading(true))
-      const res = await profileAPI.uploadPhoto(file)
       try {
+         const res = await profileAPI.uploadPhoto(file)
          if (res.data.resultCode === 0) {
             dispatch(setUserPhoto(res.data.data.photos.small, res.data.data.photos.large))
             dispatch(setPhotoLoading(false))
          } else {
             dispatch(setPhotoLoading(false))
+         }
+      } catch (error) {
+         throw error
+      }
+   }
+
+export const saveProfile = (userID: number, profileData: SaveProfileParamsType) =>
+   async (dispatch: Dispatch | any) => {
+      try {
+         const res = await profileAPI.putProfileData(profileData)
+         if (res.data.resultCode === 0) {
+            dispatch(thunkGetUserInfo(userID))
          }
       } catch (error) {
          throw error

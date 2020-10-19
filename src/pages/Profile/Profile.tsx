@@ -4,6 +4,7 @@ import styles from './Profile.module.scss'
 import MyPosts from './MyPosts'
 import {ProfileInfoType} from '../../redux/profilePage/profileType'
 import Preloader from '../../components/common/Preloader/Preloader'
+import {SaveProfileParamsType} from '../../api/apiType'
 
 type PropsProfileType = {
    isOwner: boolean
@@ -13,6 +14,7 @@ type PropsProfileType = {
    updateStatus: (status: string) => void
    addPost: (value: string) => void
    addLike: (id: string) => void
+   saveProfile: (userID: number, profileData: SaveProfileParamsType) => void
 }
 
 function Profile(props: PropsProfileType) {
@@ -27,7 +29,8 @@ function Profile(props: PropsProfileType) {
          <UserInfo isOwner={props.isOwner}
                    userInfo={props.profileInfo}
                    status={props.status}
-                   updateStatus={props.updateStatus}/>
+                   updateStatus={props.updateStatus}
+                   saveProfile={props.saveProfile}/>
 
          <MyPosts posts={props.posts}
                   addPost={props.addPost}
