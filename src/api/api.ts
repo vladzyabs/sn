@@ -1,5 +1,5 @@
 import * as axios from 'axios'
-import {ResponseType, AuthMeDataType, ProfileDataType, UsersDataType} from './apiType'
+import {ResponseType, AuthMeDataType, ProfileDataType, UsersDataType, SaveProfileParamsType} from './apiType'
 
 const instance = axios.default.create({
    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -45,6 +45,10 @@ export const profileAPI = {
       return instance
          .put<ResponseType<{photos: {small: string, large: string}}>>(`/profile/photo`, formData)
    },
+   putProfileData(data: SaveProfileParamsType) {
+      return instance
+         .put<ResponseType>(`/profile`, data)
+   }
 }
 
 export const usersAPI = {
